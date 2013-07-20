@@ -1,0 +1,76 @@
+#include "bullet.h"
+
+Gun gun[5];
+
+void Bullet::init(float px, float py, float ptheta, int type)
+{
+    _speed  = gun[type].speed;
+    _w  = gun[type].bW;
+    _h = gun[type].bH;
+    _x = px-_w/2;
+    _y = py-_h/2;
+    _theta =  ptheta;
+    _damage = gun[type].damage;
+    _dead = false;
+
+	_theta -= gun[type].acc/2;
+	_theta += (float)rand()/((float)RAND_MAX/gun[type].acc);
+}
+
+void Bullet::move()
+{
+    _x += (_speed * cos(_theta));
+    _y += (_speed * sin(_theta));
+}
+
+void Bullet::render(void)
+{
+    if(!_dead)
+    {
+        glColor3f(0.f, 0.f, 0.f);
+        glBegin(GL_QUADS);
+            glVertex2d(_x, _y);
+            glVertex2d(_x+_w, _y);
+            glVertex2d(_x+_w, _y+_h);
+            glVertex2d(_x, _y+_h);
+        glEnd();
+    }
+}
+
+void initGuns()
+{
+    gun[PISTOL].bH     = 4;
+    gun[PISTOL].bW     = 4;
+    gun[PISTOL].speed  = 3750;
+    gun[PISTOL].damage = 20;
+    gun[PISTOL].delay  = -1;
+	gun[PISTOL].acc    = .1f;
+
+    gun[SNIPER].bH     = 8;
+    gun[SNIPER].bW     = 8;
+    gun[SNIPER].speed  = 7500;
+    gun[SNIPER].damage = 50;
+    gun[SNIPER].delay  = -1;
+	gun[SNIPER].acc    = 0;
+
+    gun[RPG].bH     = 25;
+    gun[RPG].bW     = 25;
+    gun[RPG].speed  = 1500;
+    gun[RPG].damage = 100;
+    gun[RPG].delay  = -1;
+	gun[RPG].acc    = .25;
+
+    gun[GATLING].bH     = 3;
+    gun[GATLING].bW     = 3;
+    gun[GATLING].speed  = 1;
+    gun[GATLING].damage = 1;
+    gun[GATLING].delay  = .001f;
+	gun[GATLING].acc    = .2f;
+
+	gun[SHOTGUN].bH     = 4;
+	gun[SHOTGUN].bW     = 4;
+	gun[SHOTGUN].speed  = 3000;
+	gun[SHOTGUN].damage = 13;
+	gun[SHOTGUN].delay  = -1;
+	gun[SHOTGUN].acc    = .1f;
+}
