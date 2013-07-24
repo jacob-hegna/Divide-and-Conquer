@@ -3,12 +3,13 @@
 
 #include <GLFW/glfw3.h>
 
+#include "../engine/engine.h"
 #include "../../window/window.h"
 
 namespace StartMenu {
-	void init(void **data);
-	void logic(Window *window, void *data);
-	void render(void *data);
+	void init(Mode::Engine*);
+	void logic(Mode::Engine*);
+	void render(Mode::Engine*);
 };
 
 #endif

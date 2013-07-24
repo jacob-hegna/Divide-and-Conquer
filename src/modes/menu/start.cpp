@@ -3,16 +3,16 @@
 
 #include "../../media/font/glfont.h"
 
-void StartMenu::init(void **data) {
+void StartMenu::init(Mode::Engine *engine) {
 
 }
 
-void StartMenu::logic(Window *window, void *data) {
-	if(window->getKey(GLFW_KEY_SPACE)) {
+void StartMenu::logic(Mode::Engine *engine) {
+	if(engine->getWindow()->getKey(GLFW_KEY_SPACE)) {
 		globalGameMode = GAME_LOOP;
 	}
 }
 
-void StartMenu::render(void *data) {
+void StartMenu::render(Mode::Engine *engine) {
 	glPrintf("Start", "media/fonts/largeArial.glf", 10, 10);
 }

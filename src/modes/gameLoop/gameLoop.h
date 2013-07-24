@@ -1,11 +1,11 @@
 #ifndef _GAMELOOP_H
 #define _GAMELOOP_H
 
+#include "../engine/engine.h"
 #include "../../window/window.h"
 #include "../../actor/hero/hero.h"
 #include "../../actor/enemy/enemy.h"
-
-float RandomFloat(float a, float b);
+#include "../../utilities/util.h"
 
 namespace GameLoop {
 
@@ -16,7 +16,7 @@ namespace GameLoop {
 
 			enemyAmt = 4;
 			for(int i = 0; i < enemyAmt; ++i) {
-				enemy[i] = new Enemy(rand() % 800 - 400, rand() % 600 - 300, 75, 75, RandomFloat(0.05f, 0.15f));
+				enemy[i] = new Enemy(rand() % 800 - 400, rand() % 600 - 300, 75, 75, randF(0.05f, 0.15f));
 			}
 		};
 
@@ -25,10 +25,10 @@ namespace GameLoop {
 		Enemy **enemy;
 	};
 
-	void init(void **data);
-	void logic(Window *window, void *data);
-	void render(void *data);
-	void camera(Hero *hero);
+	void init(Mode::Engine* engine);
+	void logic(Mode::Engine* engine);
+	void render(Mode::Engine* engine);
+	void camera(Hero*);
 }
 
 #endif

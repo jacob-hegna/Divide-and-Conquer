@@ -1,36 +1,32 @@
 #include "gameLoop.h"
 #include "../modes.h"
 #include "../engine/engine.h"
-using namespace Mode;
 
-
-float RandomFloat(float a, float b) {
-    float random = ((float) rand()) / (float) RAND_MAX;
-    float diff = b - a;
-    float r = random * diff;
-    return a + r;
+void GameLoop::init(Mode::Engine *engine) {
+	engine->setData(new Actors(0, 0));
 }
 
-void GameLoop::init(void **data) {
-	Engine::setData(data, new Actors(0, 0));
-}
-
-void GameLoop::logic(Window *window, void *data) {
-	Actors *actors = Engine::getData<Actors>(data);
-	actors->hero->move(window);
+void GameLoop::logic(Mode::Engine *engine) {
+	Actors *actors = engine->getData<Actors>();
+	actors->hero->move(engine->getWindow());
 	for(int i = 0; i < actors->enemyAmt; ++i) {
 		actors->enemy[i]->move(actors->hero);
 	}
 
-	GameLoop::camera(actors->hero);
-
-	if(window->getKey(GLFW_KEY_ESCAPE)) {
-		globalGameMode = PAUSE_MENU;
+	if(engine->getWindow()->getKey(GLFW_KEY_ESCAPE)) {
+		//globalGameMode = PAUSE_MENU;
 	}
 }
 
-void GameLoop::render(void *data) {
-	Actors *actors = Engine::getData<Actors>(data);
+void GameLoop::render(Mode::Engine *engine) {
+	Actors *actors = engine->getData<Actors>();
+	
+	glPrintf((int)engine->getFps(), "media/fonts/arial.glf", 10, 10);
+
+	// HUD code goes above this line
+	GameLoop::camera(actors->hero);
+	// Game code goes below this line
+
 	actors->hero->render();
 	for(int i = 0; i < actors->enemyAmt; ++i) {
 		actors->enemy[i]->render();

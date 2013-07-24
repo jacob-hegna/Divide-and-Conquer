@@ -3,16 +3,16 @@
 
 #include "../../media/font/glfont.h"
 
-void PauseMenu::init(void **data) {
+void PauseMenu::init(Mode::Engine *engine) {
 
 }
 
-void PauseMenu::logic(Window *window, void *data) {
-	if(window->getKey(GLFW_KEY_ESCAPE)) {
+void PauseMenu::logic(Mode::Engine *engine) {
+	if(engine->getWindow()->getKey(GLFW_KEY_ESCAPE)) {
 		globalGameMode = GAME_LOOP;
 	}
 }
 
-void PauseMenu::render(void *data) {
+void PauseMenu::render(Mode::Engine *engine) {
 	glPrintf("Paused", "media/fonts/largeArial.glf", 10, 10);
 }
