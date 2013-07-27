@@ -32,7 +32,7 @@ public:
 		// Nothing to do here...
 	}
     
-	Bullet(float x, float y, float theta, int type) {
+	Bullet(float x, float y, float theta, GunType type) {
 		init(x, y, theta, type);
 	}
 
@@ -41,7 +41,7 @@ public:
 	}
 
 	static void initGuns( void );
-    void init(float x, float y, float theta, int type);
+    void init(float x, float y, float theta, GunType type);
     void move(Mode::Engine *engine);
 	void render();
 

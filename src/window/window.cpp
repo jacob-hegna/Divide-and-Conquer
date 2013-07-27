@@ -1,16 +1,7 @@
 #include "window.h"
 
-// Functions added for project
-void keyCall(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-	//if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-        //glfwSetWindowShouldClose(window, GL_TRUE);
-}
-
-
-// Standard functions
 Window::Window(std::string title,
-			   int x, int y, 
+			   int x, int y,
 		       int w, int h,
 		       int aa,
 		       float r, float g, float b)
@@ -27,7 +18,7 @@ void Window::free(void) {
 }
 
 int Window::init(std::string title,
-				  int x, int y, 
+				  int x, int y,
 		          int w, int h,
 		          int aa,
 		          float r, float g, float b)
@@ -44,7 +35,7 @@ int Window::init(std::string title,
 
 	glfwWindowHint(GLFW_SAMPLES, _aa);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-	
+
 	_window = glfwCreateWindow(_w, _h, _title.c_str(), nullptr, nullptr);
 
 	if(!_window) {
@@ -59,7 +50,7 @@ int Window::init(std::string title,
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
-	
+
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluOrtho2D(0, _w, _h, 0);

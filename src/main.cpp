@@ -6,15 +6,17 @@
 #include "window\window.h"
 #include "modes\modes.h"
 
-
+#ifdef __WIN32
 int WINAPI WinMain(HINSTANCE hInstance,
                    HINSTANCE hPrevInstance,
                    LPSTR lpCmdLine,
                    int nCmdShow)
+#else
+int main(int argc, char *argv[])
+#endif
 {
 	Window::initGLFW();
 	Window window("Divide and Conquer", 50, 50);
-	window.setKeyCallback(keyCall);
 
 	srand(time(0));
 	gameModes(&window);

@@ -1,8 +1,10 @@
 #include "bullet.h"
 
+#include <cmath>
+
 Gun gun[5];
 
-void Bullet::init(float px, float py, float ptheta, int type)
+void Bullet::init(float px, float py, float ptheta, GunType type)
 {
     _speed  = gun[type].speed;
     _w      = gun[type].bW;
@@ -16,7 +18,7 @@ void Bullet::init(float px, float py, float ptheta, int type)
 	_theta -= gun[type].acc/2;
 	_theta += (float)rand()/((float)RAND_MAX/gun[type].acc);
 
-	_type = (GunType)type;
+	_type = type;
 }
 
 void Bullet::move(Mode::Engine *engine)
@@ -66,7 +68,7 @@ void Bullet::initGuns( void ) {
     gun[GATLING].speed  = 650;
     gun[GATLING].damage = 1;
     gun[GATLING].delay  = .001f;
-	gun[GATLING].acc    = .2f;
+	gun[GATLING].acc    = .5f;
 
 	gun[SHOTGUN].bH     = 4;
 	gun[SHOTGUN].bW     = 4;

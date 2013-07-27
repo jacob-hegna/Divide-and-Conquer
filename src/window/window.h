@@ -6,10 +6,6 @@
 #define GLFW_INCLUDE_GLU
 #include <GLFW/glfw3.h>
 
-//Functions for project
-void keyCall(GLFWwindow* window, int key, int scancode, int action, int mods);
-
-// Standard class
 class Window
 {
 public:
@@ -18,7 +14,7 @@ public:
 	}
 
 	Window(std::string title,
-		   int x, int y, 
+		   int x, int y,
 		   int w = 800, int h = 600,
 		   int aa = 16,
 		   float r = 1.f,
@@ -41,7 +37,7 @@ public:
 	}
 
 	int init(std::string title,
-		      int x, int y, 
+		      int x, int y,
 		      int w = 800, int h = 600,
 		      int aa = 16,
 		      float r = 1.f,
@@ -92,7 +88,7 @@ public:
 
 private:
 	GLFWwindow *_window;
-	
+
 	std::string _title;
 	int _x, _y;
 	int _w, _h;

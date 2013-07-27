@@ -50,13 +50,30 @@ void Hero::_keys(Mode::Engine *engine) {
 }
 
 void Hero::shoot(Mode::Engine *engine) {
-	if(engine->getWindow()->getKey(GLFW_KEY_SPACE)) {
-		_bullet->push_back(new Bullet(_x, _y, (_theta*-1)-M_PI/4, _gunType));
+	if(glfwGetMouseButton(engine->getWindow()->getWindow(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
+		if(gun[_gunType].delay != -1) {
+			_bullet->push_back(new Bullet(cos(_theta*-1 - M_PI/4)*_w/2+_x+_w/2, sin(_theta*-1 - M_PI/4)*_h/2+_y+_h/2, (_theta*-1)-M_PI/4, _gunType));
+		} else {
+			if(!_mouseBuffer) {
+				_bullet->push_back(new Bullet(cos(_theta*-1 - M_PI/4)*_w/2+_x+_w/2, sin(_theta*-1 - M_PI/4)*_h/2+_y+_h/2, (_theta*-1)-M_PI/4, _gunType));
+				_mouseBuffer = true;
+			}
+		}
+	} else if(glfwGetMouseButton(engine->getWindow()->getWindow(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_RELEASE) {
+		_mouseBuffer = false;
 	}
 
+	bool canClear = true;
 	for(int i = 0; i < _bullet->size(); ++i) {
 		_bullet->at(i)->move(engine);
+		if(canClear && (_bullet->at(i)->getX() < 400 + _x && 
+			_bullet->at(i)->getX() > -400 + _x && 
+			_bullet->at(i)->getY() < 300 + _y &&
+			_bullet->at(i)->getY() > -300 + _y)) {
+			canClear = false;
+		}
 	}
+	if(canClear) _bullet->clear();
 }
 
 void Hero::free(void) {

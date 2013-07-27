@@ -47,6 +47,9 @@ private:
 	std::vector<Bullet*> *_bullet;
 	GunType _gunType;
 	int _ammo;
+	// some stuff to make the fire rates work
+	bool   _mouseBuffer;
+	double _timeBuffer;
 };
 
 #endif

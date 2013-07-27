@@ -30,15 +30,16 @@ void Enemy::move(Mode::Engine *engine) {
 		bullet->at(i)->getY() < _y + _h) {
 			(_health > 0) ? _health-=gun[bullet->at(i)->getType()].damage : _dead = true;
 			bullet->at(i)->die();
-			_x=0;
-			_y=0;
-			_w=0;
-			_h=0;
 		}
 	}
 
 	if(!_dead) {
 		_x += (_speed * cos(_theta + 3.1415/4))/engine->getFps();
 		_y -= (_speed * sin(_theta + 3.1415/4))/engine->getFps();
+	} else {
+		_x=0;
+		_y=0;
+		_w=0;
+		_h=0;
 	}
 }
