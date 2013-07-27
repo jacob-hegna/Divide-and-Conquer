@@ -2,9 +2,13 @@
 #define _HERO_H
 
 #include <vector>
+#include <cmath>
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
 #include "../actor.h"
-#include "../../window/window.h"
+#include "../../modes/engine/engine.h"
 #include "../bullet/bullet.h"
 
 class Hero : public Actor {
@@ -19,7 +23,7 @@ public:
 		 float health = 100) {init(x, y, w, h, speed, health);}
 
 	~Hero(void) {
-
+		free();
 	}
 
 	void init(float x = 0, float y = 0,
@@ -27,15 +31,22 @@ public:
 			  float speed = 260,
 			  float health = 100);
 
-	void move(Window *window);
-	void shoot(Window *window);
+	void move(Mode::Engine *engine);
+	void shoot(Mode::Engine *engine);
+	void render(void);
+
+	std::vector<Bullet*>* getBullet(void) {
+		return _bullet;
+	}
+
+	void free(void);
 
 private:
-	void keys(Window *window);
+	void _keys(Mode::Engine *engine);
 
-	std::vector<Bullet> bullet;
-	GunType gunType;
-	int ammo;
+	std::vector<Bullet*> *_bullet;
+	GunType _gunType;
+	int _ammo;
 };
 
 #endif

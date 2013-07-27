@@ -3,6 +3,7 @@
 
 #include "../actor.h"
 #include "../hero/hero.h"
+#include "../../modes/engine/engine.h"
 
 class Enemy : public Actor {
 public:
@@ -24,7 +25,7 @@ public:
 			  float speed = 260,
 			  float health = 100);
 
-	void move(Hero *hero);
+	void move(Mode::Engine *engine);
 };
 
 #endif

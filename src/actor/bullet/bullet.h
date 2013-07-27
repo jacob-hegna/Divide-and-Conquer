@@ -2,8 +2,8 @@
 #define _BULLET_H
 
 #include "../actor.h"
+#include "../../modes/engine/engine.h"
 
-void initGuns();
 enum GunType 
 {
 	PISTOL,
@@ -13,20 +13,19 @@ enum GunType
 	SHOTGUN
 };
 
-struct Gun
-{
+struct Gun {
     float speed;
     int bW, bH;
     float damage;
     float delay;
 	float acc;
 };
-
 extern Gun gun[5];
 
 class Bullet : public Actor
 {
 private:
+	GunType _type;
     float _damage;
 public:
     Bullet(void) {
@@ -41,8 +40,9 @@ public:
 
 	}
 
+	static void initGuns( void );
     void init(float x, float y, float theta, int type);
-    void move();
+    void move(Mode::Engine *engine);
 	void render();
 
     float getDamage(void) {return _damage;}
@@ -52,6 +52,9 @@ public:
 	}
 	float getY(void) {
 		return _y;
+	}
+	GunType getType(void) {
+		return _type;
 	}
 };
 

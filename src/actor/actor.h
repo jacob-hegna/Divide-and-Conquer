@@ -1,6 +1,8 @@
 #ifndef _ACTOR_H
 #define _ACTOR_H
 
+#include <vector>
+
 #include "../window/window.h"
 
 class Actor {

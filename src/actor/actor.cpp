@@ -10,12 +10,14 @@
 #include "actor.h"
 
 void Actor::render(void) {
-	glColor3f(1.f, 0.f, 0.f);
-	glBegin(GL_QUADS);
-		for(int i = 0; i < 4; ++i) {
-			glVertex2f(_coords.x[i], _coords.y[i]);
-		}
-	glEnd();
+	if(!_dead) {
+		glColor3f(1.f, 0.f, 0.f);
+		glBegin(GL_QUADS);
+			for(int i = 0; i < 4; ++i) {
+				glVertex2f(_coords.x[i], _coords.y[i]);
+			}
+		glEnd();
+	}
 }
 
 void Actor::getCenter(float *x, float *y)

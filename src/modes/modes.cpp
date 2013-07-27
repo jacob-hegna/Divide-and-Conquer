@@ -10,14 +10,23 @@
 GameModeType globalGameMode = GAME_LOOP;
 
 void gameModes(Window *window) {
-	Mode::Engine *engine = new Mode::Engine[3];
-	engine[GAME_LOOP].init(window, GameLoop::init, GameLoop::logic, GameLoop::render);
-	engine[START_MENU].init(window, StartMenu::init, StartMenu::logic, StartMenu::render);
-	engine[PAUSE_MENU].init(window, PauseMenu::init, PauseMenu::logic, PauseMenu::render);
+	Mode::Engine **engine = new Mode::Engine*[3];
+	for(int i = 0; i < 3; ++i) {
+		engine[i] = new Mode::Engine;
+	}
+
+	engine[GAME_LOOP]->init(window, GameLoop::init, GameLoop::logic, GameLoop::render, GameLoop::free);
+	engine[START_MENU]->init(window, StartMenu::init, StartMenu::logic, StartMenu::render, nullptr);
+	engine[PAUSE_MENU]->init(window, PauseMenu::init, PauseMenu::logic, PauseMenu::render, nullptr);
 
 	do {
-		engine[globalGameMode].use();
+		engine[globalGameMode]->use();
 	} while( !window->shouldClose() );
+
+	for(int i = 0; i < 3; ++i) {
+		engine[i]->free();
+		delete engine[i];
+	}
 
 	delete [] engine;
 }

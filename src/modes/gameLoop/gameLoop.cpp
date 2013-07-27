@@ -1,18 +1,22 @@
 #include "gameLoop.h"
-#include "../modes.h"
-#include "../engine/engine.h"
 
 void GameLoop::init(Mode::Engine *engine) {
-	engine->setData(new Actors(0, 0));
+	Actors *actors = new Actors;
+	actors->pushHero(0, 0, 75, 75, 325.f, 100);
+	for(int i = 0; i < 5; ++i) {
+		actors->pushEnemy(randF(-400, 400), randF(-300, 300), 75, 75, randF(130.f, 292.5f), 100);
+	}
+	engine->setData<Actors>(actors);
 }
 
 void GameLoop::logic(Mode::Engine *engine) {
 	Actors *actors = engine->getData<Actors>();
-	actors->hero->move(engine->getWindow());
-	for(int i = 0; i < actors->enemyAmt; ++i) {
-		actors->enemy[i]->move(actors->hero);
+	for(int i = 0; i < actors->getHeroAmt(); ++i) {
+		actors->getHero(i)->move(engine);
 	}
-
+	for(int i = 0; i < actors->getEnemyAmt(); ++i) {
+		actors->getEnemy(i)->move(engine);
+	}
 	if(engine->getWindow()->getKey(GLFW_KEY_ESCAPE)) {
 		//globalGameMode = PAUSE_MENU;
 	}
@@ -24,12 +28,21 @@ void GameLoop::render(Mode::Engine *engine) {
 	glPrintf((int)engine->getFps(), "media/fonts/arial.glf", 10, 10);
 
 	// HUD code goes above this line
-	GameLoop::camera(actors->hero);
+	GameLoop::camera(actors->getHero(0));
 	// Game code goes below this line
 
-	actors->hero->render();
-	for(int i = 0; i < actors->enemyAmt; ++i) {
-		actors->enemy[i]->render();
+	for(int i = 0; i < actors->getHeroAmt(); ++i) {
+		actors->getHero(i)->render();
+	}
+	for(int i = 0; i < actors->getEnemyAmt(); ++i) {
+		actors->getEnemy(i)->render();
+	}
+}
+
+void GameLoop::free(Mode::Engine *engine) {
+	Actors *actors = engine->getData<Actors>();
+	for(int i = 0; i < actors->getHeroAmt(); ++i) {
+		actors->getHero(i)->free();
 	}
 }
 

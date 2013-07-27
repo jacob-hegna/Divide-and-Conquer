@@ -1,9 +1,10 @@
 #include "engine.h"
 
-void Mode::Engine::init(Window *window, void (*_init)(Engine*), void (*logic)(Engine*), void (*render)(Engine*)) {
+void Mode::Engine::init(Window *window, void (*_init)(Engine*), void (*logic)(Engine*), void (*render)(Engine*), void (*free)(Engine*)) {
 	_window = window;
 	_logic  = logic;
 	_render = render;
+	_free   = free;
 
 	if(_init != nullptr) _init(this);
 

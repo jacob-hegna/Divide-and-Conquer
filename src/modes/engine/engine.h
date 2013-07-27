@@ -15,15 +15,18 @@ namespace Mode {
 			//Nothing to do here...
 		}
 
-		Engine(Window *window, void (*_init)(Engine*), void (*logic)(Engine*), void (*render)(Engine*)) {
-			init(window, _init, logic, render);
+		Engine(Window *window, void (*_init)(Engine*), void (*logic)(Engine*), void (*render)(Engine*), void (*free)(Engine*)) {
+			init(window, _init, logic, render, free);
 		}
 
 		~Engine(void) {
-			_free();
+			if(_free != nullptr) _free(this);
+		}
+		void free(void) {
+			if(_free != nullptr) _free(this);
 		}
 
-		void init(Window *window, void(*_init)(Engine*), void (*logic)(Engine*), void (*render)(Engine*));
+		void init(Window *window, void(*_init)(Engine*), void (*logic)(Engine*), void (*render)(Engine*), void (*free)(Engine*));
 
 		void use(void);
 
@@ -45,7 +48,7 @@ namespace Mode {
 
 		double getFps(void) {
 			_timer.update();
-			return _frames/_timer.getTime();
+			return (_frames > 10) ? _frames/_timer.getTime() : 450;
 		}
 
 	private:
@@ -54,6 +57,7 @@ namespace Mode {
 		// Function pointers
 		void (*_logic)(Engine*);
 		void (*_render)(Engine*);
+		void (*_free)(Engine*);
 
 		// Misc data storage
 		// This can store a pointer to a stuct
@@ -64,11 +68,6 @@ namespace Mode {
 		// Timer is used for fps
 		Timer _timer;
 		int _frames;
-
-		// Used to clear the memory
-		void _free() {
-			
-		}
 	};
 };
 
