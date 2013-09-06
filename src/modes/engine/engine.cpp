@@ -13,6 +13,11 @@ void Mode::Engine::init(Window *window, void (*_init)(Engine*), void (*logic)(En
 }
 
 void Mode::Engine::use(void) {
+	if(_frames - _lastFrame >= 50) {
+		_instFps = 50/_timer.getInstant();
+		_timer.setInstant();
+		_lastFrame = _frames;
+	}
 	glPushMatrix();
 	_window->clear();
 

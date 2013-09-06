@@ -1,7 +1,7 @@
 #include "start.h"
 #include "../modes.h"
 
-#include "../../media/font/glfont.h"
+#include "../../media/font.h"
 
 void StartMenu::init(Mode::Engine *engine) {
 
@@ -13,6 +13,8 @@ void StartMenu::logic(Mode::Engine *engine) {
 	}
 }
 
+#include <cstdio>
+
 void StartMenu::render(Mode::Engine *engine) {
-	glPrintf("Start", "media/fonts/largeArial.glf", 10, 10);
+	glPrintf("Start", 30, 30, "media/fonts/Liberation.ttf", 12);
 }

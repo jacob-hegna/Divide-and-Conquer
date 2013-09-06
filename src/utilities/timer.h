@@ -17,9 +17,10 @@ public:
 
 	void init( double (*_timerFunc)(void) );
 	void update( void );
-	void pause( void );
-	void unpause( void );
 	void reset( void );
+
+	void setInstant( void );
+	double getInstant( void );
 
 	double getTime( void ) {
 		return _total;
@@ -30,8 +31,10 @@ public:
 	}
 
 private:
-	double _start;
-	double _total;
+	double _start,
+	       _total;
+
+	double _instStart;
 
 	double (*_timerFunc)(void);
 

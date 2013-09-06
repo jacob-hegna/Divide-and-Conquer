@@ -23,8 +23,8 @@ void Bullet::init(float px, float py, float ptheta, GunType type)
 
 void Bullet::move(Mode::Engine *engine)
 {
-	_x += (_speed * cos(_theta))/engine->getFps();
-	_y += (_speed * sin(_theta))/engine->getFps();
+	_x += (_speed * cos(_theta))/engine->getInstFps();
+	_y += (_speed * sin(_theta))/engine->getInstFps();
 }
 
 void Bullet::render(void)

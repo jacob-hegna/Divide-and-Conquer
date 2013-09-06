@@ -14,7 +14,8 @@ public:
 	Enemy(float x, float y,
 		  float w = 75, float h = 75,
 		  float speed = 260,
-		  float health = 100) {init(x, y, w, h, speed, health);}
+		  float health = 100,
+		  float damage = 0.1f) {init(x, y, w, h, speed, health, damage);}
 
 	~Enemy(void) {
 
@@ -23,9 +24,15 @@ public:
 	void init(float x = 0, float y = 0,
 			  float w = 75, float h = 75,
 			  float speed = 260,
-			  float health = 100);
+			  float health = 100,
+			  float damage = 0.1f);
 
 	void move(Mode::Engine *engine);
+	float getDamage(void) {
+		return _damage;
+	}
+private:
+	float _damage;
 };
 
 #endif

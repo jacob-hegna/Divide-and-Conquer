@@ -5,7 +5,7 @@
 #define M_PI 3.14159265358979323846
 #endif
 
-#include <GLFW\glfw3.h>
+#include <GLFW/glfw3.h>
 
 #include "actor.h"
 
@@ -26,7 +26,7 @@ void Actor::getCenter(float *x, float *y)
 	*y = (getCornerY(3) + getCornerY(1))/2;
 }
 
-void Actor::rotate(Actor *dest, float xpos, float ypos)
+void Actor::rotate(Actor *dest, float xpos, float ypos, float camx, float camy)
 {
 	if(dest != nullptr)
 	{
@@ -47,16 +47,14 @@ void Actor::rotate(Actor *dest, float xpos, float ypos)
 	}
 	else
 	{
-		if(xpos != 400 && ypos != 300) {
-			_theta = asin( (xpos - 400) / (sqrt(pow(xpos-400, 2) + pow(ypos - 300, 2))) );
-			_theta *= -1;
-			_theta += M_PI/4;
+		_theta = asin( (xpos - 400) / (sqrt(pow(xpos-400, 2) + pow(ypos - 300, 2))) );
+		_theta *= -1;
+		_theta += M_PI/4;
 
-			if(ypos - 600/2 > 0)
-			{
-				_theta += M_PI/2;
-				_theta *= -1;
-			}
+		if(ypos - 600/2 > 0)
+		{
+			_theta += M_PI/2;
+			_theta *= -1;
 		}
 	}
 

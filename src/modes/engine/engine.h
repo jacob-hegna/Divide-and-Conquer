@@ -5,10 +5,13 @@
 #include <cstdlib>
 
 #include "../../window/window.h"
-#include "../../media/font/glfont.h"
+#include "../../media/font.h"
 #include "../../utilities/timer.h"
 
 namespace Mode {
+	// This class controls any main section of game function
+	// Things like the game loop, the start menu, the pause menu,
+	// and the settings menu are controlled here
 	class Engine {
 	public:
 		Engine(void) {
@@ -50,6 +53,9 @@ namespace Mode {
 			_timer.update();
 			return (_frames > 10) ? _frames/_timer.getTime() : 450;
 		}
+		double getInstFps(void) {
+			return _instFps;
+		}
 
 	private:
 		Window *_window;
@@ -59,15 +65,34 @@ namespace Mode {
 		void (*_render)(Engine*);
 		void (*_free)(Engine*);
 
+		/* Every engine will have these functions
+		* void init(Engine*) {
+		*     // This will initialize anything you need for that scene
+		* }
+		* 
+		* void logic(Engine*) {
+		*     // This does any math/logic needed for the scene
+		* }
+		* 
+		* void render(Engine*) {
+		*     // This ONLY renders things to the screen
+		* }
+		* 
+		* void free(Engine*) {
+		*     // This frees any data allocated in void init(Engine*)
+		* }
+		*/	
+
 		// Misc data storage
 		// This can store a pointer to a stuct
 		// where you can store data to use
-		// TODO: figure out how to free it
 		void *_data;
 
 		// Timer is used for fps
 		Timer _timer;
 		int _frames;
+		int _lastFrame;
+		float _instFps;
 	};
 };
 

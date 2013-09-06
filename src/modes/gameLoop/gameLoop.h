@@ -13,7 +13,7 @@ namespace GameLoop {
 	void logic(Mode::Engine* engine);
 	void render(Mode::Engine* engine);
 	void free(Mode::Engine* engine);
-	void camera(Hero*);
+	void camera(Mode::Engine*);
 }
 
 #endif

@@ -15,7 +15,7 @@ public:
 
 	}
 
-	void rotate(Actor *dest, float xpos, float ypos);
+	void rotate(Actor *dest, float xpos = 0, float ypos = 0, float camx = 0, float camy = 0);
 
 	virtual void render(void);
 
@@ -65,6 +65,8 @@ public:
 		return _dead;
 	}
 
+	float getX(void) {return _x;}
+	float getY(void) {return _y;}
 protected:
 	float _x, _y;
 	float _w, _h;

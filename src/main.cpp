@@ -1,12 +1,14 @@
 //Standard headers
-#include <Windows.h>
 #include <ctime>
+#include <cstdlib>
+#include <cstdio>
 
 //Project headers
-#include "window\window.h"
-#include "modes\modes.h"
+#include "window/window.h"
+#include "modes/modes.h"
 
-#ifdef __WIN32
+#ifdef _WIN32
+#include <Windows.h>
 int WINAPI WinMain(HINSTANCE hInstance,
                    HINSTANCE hPrevInstance,
                    LPSTR lpCmdLine,

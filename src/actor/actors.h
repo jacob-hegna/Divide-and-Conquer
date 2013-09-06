@@ -3,14 +3,18 @@
 
 #include <vector>
 
-#include "hero\hero.h"
-#include "enemy\enemy.h"
+#include "hero/hero.h"
+#include "enemy/enemy.h"
 
 class Actors {
 public:
 	Actors(void) {
 		_hero = new std::vector<Hero*>;
 		_enemy = new std::vector<Enemy*>;
+		heroKills = 0;
+		heroPoints = 0;
+		camX = 0;
+		camY = 0;
 	}
 
 	~Actors(void) {
@@ -27,8 +31,8 @@ public:
 	void pushHero(float x, float y, float w, float h, float speed, float health) {
 		_hero->push_back(new Hero(x, y, w, h, speed, health));
 	}
-	void pushEnemy(float x, float y, float w, float h, float speed, float health) {
-		_enemy->push_back(new Enemy(x, y, w, h, speed, health));
+	void pushEnemy(float x, float y, float w, float h, float speed, float health, float damage) {
+		_enemy->push_back(new Enemy(x, y, w, h, speed, health, damage));
 	}
 
 	Hero* getHero(int i) {
@@ -51,6 +55,11 @@ public:
 	int getEnemyAmt(void) {
 		return _enemy->size();
 	}
+	
+	// public variables :(
+	int heroKills;
+	int heroPoints;
+	float camX, camY;
 
 private:
 	std::vector<Hero*>  *_hero;

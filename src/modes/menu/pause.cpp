@@ -1,7 +1,7 @@
 #include "pause.h"
 #include "../modes.h"
 
-#include "../../media/font/glfont.h"
+#include "../../media/font.h"
 
 void PauseMenu::init(Mode::Engine *engine) {
 
@@ -14,5 +14,5 @@ void PauseMenu::logic(Mode::Engine *engine) {
 }
 
 void PauseMenu::render(Mode::Engine *engine) {
-	glPrintf("Paused", "media/fonts/largeArial.glf", 10, 10);
+	//glPrintf("Paused", "media/fonts/largeArial.glf", 10, 10);
 }

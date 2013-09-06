@@ -1,11 +1,11 @@
 #include "modes.h"
 
-#include "engine\engine.h"
-#include "gameLoop\gameLoop.h"
-#include "menu\start.h"
-#include "menu\pause.h"
+#include "engine/engine.h"
+#include "gameLoop/gameLoop.h"
+#include "menu/start.h"
+#include "menu/pause.h"
 
-#include "../media/font/glfont.h"
+#include "../media/font.h"
 
 GameModeType globalGameMode = GAME_LOOP;
 
