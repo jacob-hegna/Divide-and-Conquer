@@ -6,7 +6,8 @@
 enum GameModeType {
 	GAME_LOOP,
 	START_MENU,
-	PAUSE_MENU
+	PAUSE_MENU,
+	GAME_OVER
 };
 
 extern GameModeType globalGameMode;

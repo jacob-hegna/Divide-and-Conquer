@@ -1,6 +1,7 @@
 #include "gameLoop.h"
 
-bool qBuf = false;
+bool GameLoop::qBuf = false;
+bool GameLoop::pauseBuf = false;
 
 void GameLoop::init(Mode::Engine *engine) {
 	Actors *actors = new Actors;
@@ -36,21 +37,27 @@ void GameLoop::logic(Mode::Engine *engine) {
 	}
 
 	if(engine->getWindow()->getKey(GLFW_KEY_Q)) {
-		if(!qBuf && actors->getHeroAmt() < 4) {
+		if(!GameLoop::qBuf && actors->getHeroAmt() < 4) {
 			if(actors->getHeroAmt() != 2) actors->pushHero(actors->getHero(actors->getHeroAmt()-1)->getX(), actors->getHero(actors->getHeroAmt()-1)->getY() + 150, 75, 75, 325.f, 100);
 			else                          actors->pushHero(actors->getHero(actors->getHeroAmt()-1)->getX() + 150, actors->getHero(actors->getHeroAmt()-1)->getY() - 150, 75, 75, 325.f, 100);
 			--actors->heroPoints;
 		}
-		qBuf = true;
+		GameLoop::qBuf = true;
 	} else {
-		qBuf = false;
+		GameLoop::qBuf = false;
 	}
 
 	if(engine->getWindow()->getKey(GLFW_KEY_ESCAPE)) {
-		globalGameMode = PAUSE_MENU;
+		if(!GameLoop::pauseBuf) {
+			globalGameMode = PAUSE_MENU;
+			GameLoop::pauseBuf = true;
+		}
+	} else {
+		GameLoop::pauseBuf = false;
 	}
+
 	if(actors->getHeros()->empty()) {
-		engine->getWindow()->close();
+		globalGameMode = GAME_OVER;
 	}
 }
 

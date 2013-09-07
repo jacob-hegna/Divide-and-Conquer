@@ -10,6 +10,8 @@
 #include <cstdlib>
 
 namespace GameLoop {
+	extern bool qBuf, pauseBuf;
+
 	void init(Mode::Engine* engine);
 	void logic(Mode::Engine* engine);
 	void render(Mode::Engine* engine);

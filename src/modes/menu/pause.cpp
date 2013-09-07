@@ -3,13 +3,20 @@
 
 #include "../../media/font.h"
 
+bool PauseMenu::pauseBuf = true;
+
 void PauseMenu::init(Mode::Engine *engine) {
 
 }
 
 void PauseMenu::logic(Mode::Engine *engine) {
 	if(engine->getWindow()->getKey(GLFW_KEY_ESCAPE)) {
-		globalGameMode = GAME_LOOP;
+		if(!PauseMenu::pauseBuf) {
+			globalGameMode = GAME_LOOP;
+			PauseMenu::pauseBuf = true;
+		}
+	} else {
+		PauseMenu::pauseBuf = false;
 	}
 }
 

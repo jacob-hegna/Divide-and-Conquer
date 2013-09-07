@@ -22,8 +22,8 @@ void Mode::Engine::use(void) {
 	glPushMatrix();
 	_window->clear();
 
-	_logic(this);
-	_render(this);
+	if(_logic != nullptr) _logic(this);
+	if(_render != nullptr) _render(this);
 
 	_window->render();
 
