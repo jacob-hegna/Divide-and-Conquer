@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Divide-and-Conquer" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Option extended_obj_names="1" />
+		<Build>
+			<Target title="Release">
+				<Option output="../../Divide-and-Conquer" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../../" />
+				<Option object_output="obj/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-std=c++11" />
+			<Add option="-Wall" />
+			<Add directory="libs/include" />
+		</Compiler>
+		<Linker>
+			<Add option="-lglfw3" />
+			<Add option="-lopengl32" />
+			<Add option="-lglu32" />
+			<Add option="-lgdi32" />
+			<Add directory="libs/lib" />
+		</Linker>
+		<Unit filename="../../src/actor/actor.cpp" />
+		<Unit filename="../../src/actor/actor.h" />
+		<Unit filename="../../src/actor/actors.h" />
+		<Unit filename="../../src/actor/bullet/bullet.cpp" />
+		<Unit filename="../../src/actor/bullet/bullet.h" />
+		<Unit filename="../../src/actor/enemy/enemy.cpp" />
+		<Unit filename="../../src/actor/enemy/enemy.h" />
+		<Unit filename="../../src/actor/hero/hero.cpp" />
+		<Unit filename="../../src/actor/hero/hero.h" />
+		<Unit filename="../../src/main.cpp" />
+		<Unit filename="../../src/media/font/glfont.cpp" />
+		<Unit filename="../../src/media/font/glfont.h" />
+		<Unit filename="../../src/modes/engine/engine.cpp" />
+		<Unit filename="../../src/modes/engine/engine.h" />
+		<Unit filename="../../src/modes/gameLoop/gameLoop.cpp" />
+		<Unit filename="../../src/modes/gameLoop/gameLoop.h" />
+		<Unit filename="../../src/modes/menu/pause.cpp" />
+		<Unit filename="../../src/modes/menu/pause.h" />
+		<Unit filename="../../src/modes/menu/start.cpp" />
+		<Unit filename="../../src/modes/menu/start.h" />
+		<Unit filename="../../src/modes/modes.cpp" />
+		<Unit filename="../../src/modes/modes.h" />
+		<Unit filename="../../src/utilities/timer.cpp" />
+		<Unit filename="../../src/utilities/timer.h" />
+		<Unit filename="../../src/utilities/util.cpp" />
+		<Unit filename="../../src/utilities/util.h" />
+		<Unit filename="../../src/window/window.cpp" />
+		<Unit filename="../../src/window/window.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
