@@ -1,10 +1,12 @@
 #include "gameLoop.h"
 
+bool qBuf = false;
+
 void GameLoop::init(Mode::Engine *engine) {
 	Actors *actors = new Actors;
 	actors->pushHero(0, 0, 75, 75, 325.f, 100);
 	for(int i = 0; i < 5; ++i) {
-		actors->pushEnemy(randF(-400, 400), randF(-300, 300), 75, 75, randF(130.f, 292.5f), 100, 10);
+		actors->pushEnemy(randF(-400, 400), randF(-300, 300), 75, 75, randF(130.f, 292.5f), 100, 4);
 	}
 	engine->setData<Actors>(actors);
 }
@@ -29,21 +31,19 @@ void GameLoop::logic(Mode::Engine *engine) {
 		actors->getEnemy(i)->move(engine);
 
 		if(actors->getEnemy(i)->getDead()) {
-			std::vector<Enemy*> tempVec = *actors->getEnemies();
-			actors->getEnemies()->clear();
-			for(int j = 0; j < tempVec.size(); ++j) {
-				if(j != i) {
-					actors->getEnemies()->push_back(tempVec.at(j));
-				}
-			}
-			tempVec.clear();
+			actors->getEnemy(i)->init(randF(-400, 400), randF(-300, 300), 75, 75, randF(130.f, 292.5f), 100, 10);
 		}
 	}
 
-	if(engine->getWindow()->getKey(GLFW_KEY_Q) && actors->heroPoints > 0 && actors->getHeroAmt() < 4) {
-		if(actors->getHeroAmt() != 2) actors->pushHero(actors->getHero(actors->getHeroAmt()-1)->getX(), actors->getHero(actors->getHeroAmt()-1)->getY() + 150, 75, 75, 325.f, 100);
-		else                          actors->pushHero(actors->getHero(actors->getHeroAmt()-1)->getX() + 150, actors->getHero(actors->getHeroAmt()-1)->getY() - 150, 75, 75, 325.f, 100);
-		--actors->heroPoints;
+	if(engine->getWindow()->getKey(GLFW_KEY_Q)) {
+		if(!qBuf && actors->getHeroAmt() < 4) {
+			if(actors->getHeroAmt() != 2) actors->pushHero(actors->getHero(actors->getHeroAmt()-1)->getX(), actors->getHero(actors->getHeroAmt()-1)->getY() + 150, 75, 75, 325.f, 100);
+			else                          actors->pushHero(actors->getHero(actors->getHeroAmt()-1)->getX() + 150, actors->getHero(actors->getHeroAmt()-1)->getY() - 150, 75, 75, 325.f, 100);
+			--actors->heroPoints;
+		}
+		qBuf = true;
+	} else {
+		qBuf = false;
 	}
 
 	if(engine->getWindow()->getKey(GLFW_KEY_ESCAPE)) {
@@ -58,7 +58,6 @@ void GameLoop::render(Mode::Engine *engine) {
 	Actors *actors = engine->getData<Actors>();
 	
 	// fps
-	glPrintf("l", 10, 10, "media/fonts/Liberation.ttf", 12);
 
 	// kill count
 	//glPrintf(actors->heroKills, "media/fonts/largeArial.glf", 10, 520);

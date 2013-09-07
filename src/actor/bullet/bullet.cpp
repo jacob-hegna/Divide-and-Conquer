@@ -66,7 +66,7 @@ void Bullet::initGuns( void ) {
     gun[GATLING].bH     = 3;
     gun[GATLING].bW     = 3;
     gun[GATLING].speed  = 650;
-    gun[GATLING].damage = 1;
+    gun[GATLING].damage = 3;
     gun[GATLING].delay  = .001f;
 	gun[GATLING].acc    = .5f;
 

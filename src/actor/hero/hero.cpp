@@ -38,7 +38,7 @@ void Hero::move(Mode::Engine *engine) {
 	double mx, my;
 	glfwGetCursorPos(window->getWindow(), &mx, &my);
 
-	rotate(nullptr, (float)mx, (float)my, engine->getData<Actors>()->camX, engine->getData<Actors>()->camY);
+	rotate(nullptr, (float)mx + engine->getData<Actors>()->camX-_x-_w/2, (float)my + engine->getData<Actors>()->camY-_y-_h/2, engine->getData<Actors>()->camX, engine->getData<Actors>()->camY);
 
 	_keys(engine);
 	shoot(engine);
@@ -60,7 +60,7 @@ void Hero::_getDamage(Mode::Engine *engine) {
 		   actors->getEnemy(i)->getX() + actors->getEnemy(i)->getW()/2 < _x + _w &&
 		   actors->getEnemy(i)->getY() + actors->getEnemy(i)->getH()/2 > _y &&
 		   actors->getEnemy(i)->getY() + actors->getEnemy(i)->getH()/2 < _y + _h)) {
-			   _health -= actors->getEnemy(i)->getDamage()/((engine->getInstFps() > 100) ? (float)engine->getInstFps() : 100.f);
+			   _health -= actors->getEnemy(i)->getDamage()/engine->getInstFps();
 			   if(_health <= 0) {
 			        _dead = true;
 			   }
