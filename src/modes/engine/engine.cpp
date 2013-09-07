@@ -11,11 +11,12 @@ void Mode::Engine::init(Window *window, void (*_init)(Engine*), void (*logic)(En
 	_timer.init(glfwGetTime);
 	_frames = 0;
 	_lastFrame = 0;
+	_instFps = 60;
 }
 
 void Mode::Engine::use(void) {
-	if(_frames - _lastFrame >= 5) {
-		_instFps = 5/_timer.getInstant();
+	if(_frames - _lastFrame >= 60) {
+		if(_lastFrame >= 60) _instFps = 60/_timer.getInstant();
 		_timer.setInstant();
 		_lastFrame = _frames;
 	}

@@ -8,7 +8,7 @@
 
 #include "../media/font.h"
 
-GameModeType globalGameMode = GAME_LOOP;
+GameModeType globalGameMode = START_MENU;
 
 void gameModes(Window *window) {
 	Mode::Engine **engine = new Mode::Engine*[4];

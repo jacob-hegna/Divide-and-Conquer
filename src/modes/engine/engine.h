@@ -51,7 +51,7 @@ namespace Mode {
 
 		double getFps(void) {
 			_timer.update();
-			return (_frames > 10) ? _frames/_timer.getTime() : 45;
+			return (_frames > 10) ? _frames/_timer.getTime() : 10;
 		}
 		double getInstFps(void) {
 			return (_instFps > 5) ? _instFps : 5;
