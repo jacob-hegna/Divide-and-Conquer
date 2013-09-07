@@ -10,6 +10,7 @@ void Mode::Engine::init(Window *window, void (*_init)(Engine*), void (*logic)(En
 
 	_timer.init(glfwGetTime);
 	_frames = 0;
+	_lastFrame = 0;
 }
 
 void Mode::Engine::use(void) {

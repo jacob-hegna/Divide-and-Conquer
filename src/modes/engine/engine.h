@@ -51,10 +51,15 @@ namespace Mode {
 
 		double getFps(void) {
 			_timer.update();
-			return (_frames > 10) ? _frames/_timer.getTime() : 450;
+			return (_frames > 10) ? _frames/_timer.getTime() : 
+				#ifdef __WIN32
+				450;
+				#else
+				45;
+				#endif
 		}
 		double getInstFps(void) {
-			return _instFps;
+			return (_instFps > 5) ? _instFps : 5;
 		}
 
 	private:

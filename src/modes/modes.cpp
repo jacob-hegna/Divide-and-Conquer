@@ -12,7 +12,7 @@ GameModeType globalGameMode = GAME_LOOP;
 void gameModes(Window *window) {
 	Mode::Engine **engine = new Mode::Engine*[3];
 	for(int i = 0; i < 3; ++i) {
-		engine[i] = new Mode::Engine;
+		engine[i] = static_cast<Mode::Engine*>(calloc(1, sizeof(Mode::Engine)));
 	}
 
 	engine[GAME_LOOP]->init(window, GameLoop::init, GameLoop::logic, GameLoop::render, GameLoop::free);
@@ -25,7 +25,7 @@ void gameModes(Window *window) {
 
 	for(int i = 0; i < 3; ++i) {
 		engine[i]->free();
-		delete engine[i];
+		free(engine[i]);
 	}
 
 	delete [] engine;

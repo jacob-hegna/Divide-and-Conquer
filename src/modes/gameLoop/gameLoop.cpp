@@ -58,7 +58,7 @@ void GameLoop::render(Mode::Engine *engine) {
 	Actors *actors = engine->getData<Actors>();
 	
 	// fps
-	//glPrintf((int)engine->getInstFps(), 10, 10, "media/fonts/LiberationSerif-Regular.ttf", 12);
+	glPrintf("l", 10, 10, "media/fonts/Liberation.ttf", 12);
 
 	// kill count
 	//glPrintf(actors->heroKills, "media/fonts/largeArial.glf", 10, 520);

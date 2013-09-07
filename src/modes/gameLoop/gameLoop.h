@@ -7,6 +7,7 @@
 #include "../modes.h"
 #include "../../actor/actors.h"
 
+#include <cstdlib>
 
 namespace GameLoop {
 	void init(Mode::Engine* engine);

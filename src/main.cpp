@@ -17,13 +17,16 @@ int WINAPI WinMain(HINSTANCE hInstance,
 int main(int argc, char *argv[])
 #endif
 {
-	Window::initGLFW();
-	Window window("Divide and Conquer", 50, 50);
+	if(Window::initGLFW() != 0) {
+		return -1;
+	}
+	
+	Window *window = new Window("Divide and Conquer", 50, 50);
 
 	srand(time(0));
-	gameModes(&window);
+	gameModes(window);
 
-	window.free();
+	delete window;
 	Window::deinitGLFW();
 	return 0;
 }

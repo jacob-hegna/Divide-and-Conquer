@@ -45,7 +45,7 @@ void Enemy::move(Mode::Engine *engine) {
 				bullet->at(i)->die();
 			}
 		}
-		_x += (_speed * cos(_theta + 3.1415/4))/((engine->getInstFps() > 100) ? engine->getInstFps() : 400);
-		_y -= (_speed * sin(_theta + 3.1415/4))/((engine->getInstFps() > 100) ? engine->getInstFps() : 400);
+		_x += (_speed * cos(_theta + 3.1415/4))/engine->getInstFps();
+		_y -= (_speed * sin(_theta + 3.1415/4))/engine->getInstFps();
 	}
 }
