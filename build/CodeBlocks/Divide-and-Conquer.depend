@@ -1,10 +1,10 @@
 # depslib dependency file v1.0
-1374872439 source:c:\users\jacob pc\programming\divide-and-conquer\src\actor\actor.cpp
+1378613771 source:c:\users\jacob pc\programming\divide-and-conquer\src\actor\actor.cpp
 	<cmath>
-	<GLFW\glfw3.h>
+	<GLFW/glfw3.h>
 	"actor.h"
 
-1371440046 c:\users\jacob pc\programming\divide-and-conquer\build\codeblocks\libs\include\glfw\glfw3.h
+1378613771 c:\users\jacob pc\programming\divide-and-conquer\build\codeblocks\libs\include\glfw\glfw3.h
 	<stddef.h>
 	<OpenGL/gl3.h>
 	<OpenGL/gl.h>
@@ -16,13 +16,19 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1374890011 c:\users\jacob pc\programming\divide-and-conquer\src\actor\actor.h
+1378613771 c:\users\jacob pc\programming\divide-and-conquer\src\actor\actor.h
 	<vector>
 	"../window/window.h"
+	"../modes/engine/engine.h"
 
-1374940505 c:\users\jacob pc\programming\divide-and-conquer\src\window\window.h
+1378614421 c:\users\jacob pc\programming\divide-and-conquer\src\window\window.h
 	<string>
+	<fstream>
+	<sys/stat.h>
+	<iostream>
 	<GLFW/glfw3.h>
+	"../media/rapidxml/rapidxml.hpp"
+	"../media/rapidxml/rapidxml_utils.hpp"
 
 1373256342 c:\users\jacob pc\programming\divide-and-conquer\src\media\font\glfont.h
 	<string>
@@ -30,15 +36,16 @@
 	<Windows.h>
 	<GL/gl.h>
 
-1374898406 source:c:\users\jacob pc\programming\divide-and-conquer\src\actor\enemy\enemy.cpp
+1378613771 source:c:\users\jacob pc\programming\divide-and-conquer\src\actor\enemy\enemy.cpp
 	"enemy.h"
 	"../actors.h"
 	<cmath>
 
-1374898550 source:c:\users\jacob pc\programming\divide-and-conquer\src\actor\hero\hero.cpp
+1378613771 source:c:\users\jacob pc\programming\divide-and-conquer\src\actor\hero\hero.cpp
 	"hero.h"
+	"../actors.h"
 
-1374898027 c:\users\jacob pc\programming\divide-and-conquer\src\actor\hero\hero.h
+1378613771 c:\users\jacob pc\programming\divide-and-conquer\src\actor\hero\hero.h
 	<vector>
 	<cmath>
 	"../actor.h"
@@ -47,13 +54,15 @@
 
 1373241328 source:c:\users\jacob pc\programming\divide-and-conquer\src\globals\globals.cpp
 
-1374940100 source:c:\users\jacob pc\programming\divide-and-conquer\src\main.cpp
-	<Windows.h>
+1378614332 source:c:\users\jacob pc\programming\divide-and-conquer\src\main.cpp
 	<ctime>
-	"window\window.h"
-	"modes\modes.h"
+	<cstdlib>
+	<cstdio>
+	"window/window.h"
+	"modes/modes.h"
+	<Windows.h>
 
-1373314856 c:\users\jacob pc\programming\divide-and-conquer\src\modes\modes.h
+1378613771 c:\users\jacob pc\programming\divide-and-conquer\src\modes\modes.h
 	"../window/window.h"
 
 1373256335 source:c:\users\jacob pc\programming\divide-and-conquer\src\media\font\glfont.cpp
@@ -72,61 +81,64 @@
 	"../window/window.h"
 	"../actor/hero/hero.h"
 
-1374680020 source:c:\users\jacob pc\programming\divide-and-conquer\src\modes\menu\pause.cpp
+1378613771 source:c:\users\jacob pc\programming\divide-and-conquer\src\modes\menu\pause.cpp
 	"pause.h"
 	"../modes.h"
-	"../../media/font/glfont.h"
+	"../../media/font.h"
 
-1374679905 source:c:\users\jacob pc\programming\divide-and-conquer\src\modes\menu\start.cpp
+1378613917 source:c:\users\jacob pc\programming\divide-and-conquer\src\modes\menu\start.cpp
 	"start.h"
 	"../modes.h"
-	"../../media/font/glfont.h"
+	"../../media/font.h"
+	<cstdio>
 
-1374891201 source:c:\users\jacob pc\programming\divide-and-conquer\src\modes\modes.cpp
+1378613771 source:c:\users\jacob pc\programming\divide-and-conquer\src\modes\modes.cpp
 	"modes.h"
-	"engine\engine.h"
-	"gameLoop\gameLoop.h"
-	"menu\start.h"
-	"menu\pause.h"
-	"../media/font/glfont.h"
+	"engine/engine.h"
+	"gameLoop/gameLoop.h"
+	"menu/start.h"
+	"menu/pause.h"
+	"menu/gameOver.h"
+	"../media/font.h"
 
-1374897769 source:c:\users\jacob pc\programming\divide-and-conquer\src\window\window.cpp
+1378613771 source:c:\users\jacob pc\programming\divide-and-conquer\src\window\window.cpp
 	"window.h"
 
-1374894321 source:c:\users\jacob pc\programming\divide-and-conquer\src\modes\gameloop\gameloop.cpp
+1378613771 source:c:\users\jacob pc\programming\divide-and-conquer\src\modes\gameloop\gameloop.cpp
 	"gameLoop.h"
 
-1374890838 c:\users\jacob pc\programming\divide-and-conquer\src\modes\gameloop\gameloop.h
+1378613771 c:\users\jacob pc\programming\divide-and-conquer\src\modes\gameloop\gameloop.h
 	"../engine/engine.h"
 	"../../window/window.h"
 	"../../utilities/util.h"
 	"../modes.h"
 	"../../actor/actors.h"
+	<cstdlib>
 
-1374679990 c:\users\jacob pc\programming\divide-and-conquer\src\modes\menu\pause.h
+1378613771 c:\users\jacob pc\programming\divide-and-conquer\src\modes\menu\pause.h
 	"../engine/engine.h"
 
-1374679867 c:\users\jacob pc\programming\divide-and-conquer\src\modes\menu\start.h
+1378613771 c:\users\jacob pc\programming\divide-and-conquer\src\modes\menu\start.h
 	<GLFW/glfw3.h>
 	"../engine/engine.h"
 	"../../window/window.h"
 
-1374895003 c:\users\jacob pc\programming\divide-and-conquer\src\modes\engine\engine.h
+1378613771 c:\users\jacob pc\programming\divide-and-conquer\src\modes\engine\engine.h
 	<GLFW/glfw3.h>
 	<cstdlib>
 	"../../window/window.h"
-	"../../media/font/glfont.h"
+	"../../media/font.h"
 	"../../utilities/timer.h"
 
-1374894563 source:c:\users\jacob pc\programming\divide-and-conquer\src\modes\engine\engine.cpp
+1378613771 source:c:\users\jacob pc\programming\divide-and-conquer\src\modes\engine\engine.cpp
 	"engine.h"
 
-1374893897 c:\users\jacob pc\programming\divide-and-conquer\src\actor\enemy\enemy.h
+1378613771 c:\users\jacob pc\programming\divide-and-conquer\src\actor\enemy\enemy.h
 	"../actor.h"
 	"../hero/hero.h"
 	"../../modes/engine/engine.h"
 
-1374898495 c:\users\jacob pc\programming\divide-and-conquer\src\actor\bullet\bullet.h
+1378613771 c:\users\jacob pc\programming\divide-and-conquer\src\actor\bullet\bullet.h
 	"../actor.h"
 	"../../modes/engine/engine.h"
 
@@ -169,23 +181,52 @@
 	<time.h>
 	<dos.h>
 
-1374680177 c:\users\jacob pc\programming\divide-and-conquer\src\utilities\timer.h
+1378613771 c:\users\jacob pc\programming\divide-and-conquer\src\utilities\timer.h
 
-1374640883 c:\users\jacob pc\programming\divide-and-conquer\src\utilities\util.h
+1378613771 c:\users\jacob pc\programming\divide-and-conquer\src\utilities\util.h
 	<cstdlib>
 
-1374680227 source:c:\users\jacob pc\programming\divide-and-conquer\src\utilities\timer.cpp
+1378613771 source:c:\users\jacob pc\programming\divide-and-conquer\src\utilities\timer.cpp
 	"timer.h"
 
-1374640879 source:c:\users\jacob pc\programming\divide-and-conquer\src\utilities\util.cpp
+1378613771 source:c:\users\jacob pc\programming\divide-and-conquer\src\utilities\util.cpp
 	"util.h"
 
-1374939943 source:c:\users\jacob pc\programming\divide-and-conquer\src\actor\bullet\bullet.cpp
+1378613771 source:c:\users\jacob pc\programming\divide-and-conquer\src\actor\bullet\bullet.cpp
 	"bullet.h"
 	<cmath>
 
-1374890343 c:\users\jacob pc\programming\divide-and-conquer\src\actor\actors.h
+1378613771 c:\users\jacob pc\programming\divide-and-conquer\src\actor\actors.h
 	<vector>
-	"hero\hero.h"
-	"enemy\enemy.h"
+	"hero/hero.h"
+	"enemy/enemy.h"
+
+1378613771 c:\users\jacob pc\programming\divide-and-conquer\src\media\rapidxml\rapidxml.hpp
+	<cstdlib>
+	<cassert>
+	<new>
+	<exception>
+
+1378613771 c:\users\jacob pc\programming\divide-and-conquer\src\media\rapidxml\rapidxml_utils.hpp
+	"rapidxml.hpp"
+	<vector>
+	<string>
+	<fstream>
+	<stdexcept>
+
+1378614438 c:\users\jacob pc\programming\divide-and-conquer\src\media\font.h
+	<string>
+	<sstream>
+	<cstdio>
+
+1378614457 source:c:\users\jacob pc\programming\divide-and-conquer\src\media\font.cpp
+	"font.h"
+
+1378613771 source:c:\users\jacob pc\programming\divide-and-conquer\src\modes\menu\gameover.cpp
+	"gameOver.h"
+
+1378613771 c:\users\jacob pc\programming\divide-and-conquer\src\modes\menu\gameover.h
+	<GLFW/glfw3.h>
+	<GL/gl.h>
+	"../engine/engine.h"
 
