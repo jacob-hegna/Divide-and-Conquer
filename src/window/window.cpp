@@ -44,6 +44,8 @@ int Window::init(std::string path)
 		_w = atoi(attr->value());
 		attr = attr->next_attribute("h");
 		_h = atoi(attr->value());
+		attr = attr->next_attribute("fullscreen");
+		_fc = (atoi(attr->value()) == 1) ? true : false;
 
 		node = node->next_sibling("color");
 		attr = node->first_attribute("r");
@@ -59,12 +61,12 @@ int Window::init(std::string path)
 
 	} else {
 		std::ofstream ofile(path);
-		ofile << "<window title=\"Divide and Conquer\" aa=\"16\">" << std::endl
-			  << "     <pos  x=\"15\" y=\"15\"/>"                  << std::endl
-			  << "     <size w=\"800\" h=\"600\"/>"                << std::endl
-			  << "     <color r=\"1\" g=\"1\" b=\"1\"/>"           << std::endl
-		      << "</window>"                                       << std::endl
-		      << "<output path=\"stdio.txt\"/>"                    << std::endl;
+		ofile << "<window title=\"Divide and Conquer\" aa=\"16\">"   << std::endl
+			  << "     <pos  x=\"15\" y=\"15\"/>"                    << std::endl
+			  << "     <size w=\"800\" h=\"600\" fullscreen=\"0\"/>" << std::endl
+			  << "     <color r=\"1\" g=\"1\" b=\"1\"/>"             << std::endl
+		      << "</window>"                                         << std::endl
+		      << "<output path=\"stdio.txt\"/>"                      << std::endl;
 		ofile.close();
 		_outputFile = fopen("stdio.txt", "w");
 		_clearColor.r = 1.f;
@@ -76,6 +78,7 @@ int Window::init(std::string path)
 		_h = 600;
 		_title = "Divide and Conquer";
 		_aa = 16;
+		_fc = false;
 	}
 
 	// Output
@@ -87,7 +90,7 @@ int Window::init(std::string path)
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
 	print("Opening window...");
-	_window = glfwCreateWindow(_w, _h, _title.c_str(), nullptr, nullptr);
+	_window = glfwCreateWindow(_w, _h, _title.c_str(), (_fc) ? glfwGetPrimaryMonitor() : nullptr, nullptr);
 
 	if(!_window) {
 		glfwDestroyWindow(_window);

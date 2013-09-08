@@ -90,6 +90,7 @@ private:
 	std::string _title;
 	int _x, _y;
 	int _w, _h;
+	bool _fc;
 	int _aa;
 
 	FILE* _outputFile;

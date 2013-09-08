@@ -10,6 +10,10 @@ void PauseMenu::init(Mode::Engine *engine) {
 }
 
 void PauseMenu::logic(Mode::Engine *engine) {
+	if(engine->getWindow()->getKey(GLFW_KEY_Q)) {
+		engine->getWindow()->close();
+	}
+
 	if(engine->getWindow()->getKey(GLFW_KEY_ESCAPE)) {
 		if(!PauseMenu::pauseBuf) {
 			globalGameMode = GAME_LOOP;

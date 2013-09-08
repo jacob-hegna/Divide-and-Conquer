@@ -23,7 +23,7 @@ void Hero::init(float x, float y,
 
 void Hero::render(void) {
 
-	for(int i = (_bullet->size() > 400) ? _bullet->size() - 400 : 0; i < _bullet->size(); ++i) {
+	for(int i = (_bullet->size() > 1000) ? _bullet->size() - 1000 : 0; i < _bullet->size(); ++i) {
 		_bullet->at(i)->render();
 	}
 
@@ -88,7 +88,7 @@ void Hero::shoot(Mode::Engine *engine) {
 		wh = engine->getWindow()->getH();
 
 	bool canClear = true;
-	for(int i = (_bullet->size() > 400) ? _bullet->size() - 400 : 0; i < _bullet->size(); ++i) {
+	for(int i = (_bullet->size() > 1000) ? _bullet->size() - 1000 : 0; i < _bullet->size(); ++i) {
 		_bullet->at(i)->move(engine);
 		if(canClear && (_bullet->at(i)->getX() < ww/2 + _x && 
 			_bullet->at(i)->getX() > -ww/2 + _x && 
