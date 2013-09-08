@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "../window/window.h"
+#include "../modes/engine/engine.h"
 
 class Actor {
 public:
@@ -15,7 +16,7 @@ public:
 
 	}
 
-	void rotate(Actor *dest, float xpos = 0, float ypos = 0, float camx = 0, float camy = 0);
+	void rotate(Actor *dest, float xpos = 0, float ypos = 0, float camx = 0, float camy = 0, Mode::Engine* engine = nullptr);
 
 	virtual void render(void);
 

@@ -7,6 +7,7 @@ void Hero::init(float x, float y,
 				float health)
 {
 	Bullet::initGuns();
+	_bullet = nullptr;
 	_bullet = new std::vector<Bullet*>;
 
 	_x       = x;
@@ -17,6 +18,7 @@ void Hero::init(float x, float y,
 	_health  = health;
 	_gunType = GATLING;
 	_dead    = false;
+	_theta   = 0.f;
 }
 
 void Hero::render(void) {
@@ -38,7 +40,7 @@ void Hero::move(Mode::Engine *engine) {
 	double mx, my;
 	glfwGetCursorPos(window->getWindow(), &mx, &my);
 
-	rotate(nullptr, (float)mx + engine->getData<Actors>()->camX-_x-_w/2, (float)my + engine->getData<Actors>()->camY-_y-_h/2, engine->getData<Actors>()->camX, engine->getData<Actors>()->camY);
+	rotate(nullptr, (float)mx + engine->getData<Actors>()->camX-_x-_w/2, (float)my + engine->getData<Actors>()->camY-_y-_h/2, engine->getData<Actors>()->camX, engine->getData<Actors>()->camY, engine);
 
 	_keys(engine);
 	shoot(engine);
@@ -82,13 +84,16 @@ void Hero::shoot(Mode::Engine *engine) {
 		_mouseBuffer = false;
 	}
 
+	int ww = engine->getWindow()->getW(),
+		wh = engine->getWindow()->getH();
+
 	bool canClear = true;
 	for(int i = (_bullet->size() > 400) ? _bullet->size() - 400 : 0; i < _bullet->size(); ++i) {
 		_bullet->at(i)->move(engine);
-		if(canClear && (_bullet->at(i)->getX() < 400 + _x && 
-			_bullet->at(i)->getX() > -400 + _x && 
-			_bullet->at(i)->getY() < 300 + _y &&
-			_bullet->at(i)->getY() > -300 + _y) &&
+		if(canClear && (_bullet->at(i)->getX() < ww/2 + _x && 
+			_bullet->at(i)->getX() > -ww/2 + _x && 
+			_bullet->at(i)->getY() < wh/2 + _y &&
+			_bullet->at(i)->getY() > -wh/2 + _y) &&
 			!_bullet->at(i)->getDead()) {
 			canClear = false;
 		}

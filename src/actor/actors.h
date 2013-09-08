@@ -29,10 +29,14 @@ public:
 	}
 	
 	void pushHero(float x, float y, float w, float h, float speed, float health) {
-		_hero->push_back(new Hero(x, y, w, h, speed, health));
+		Hero *hero = nullptr;
+		hero = new Hero(x, y, w, h, speed, health);
+		_hero->push_back(hero);
 	}
 	void pushEnemy(float x, float y, float w, float h, float speed, float health, float damage) {
-		_enemy->push_back(new Enemy(x, y, w, h, speed, health, damage));
+		Enemy *enemy = nullptr;
+		enemy = new Enemy(x, y, w, h, speed, health, damage);
+		_enemy->push_back(enemy);
 	}
 
 	Hero* getHero(int i) {

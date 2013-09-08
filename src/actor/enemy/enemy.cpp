@@ -16,7 +16,8 @@ void Enemy::init(float x, float y,
 	_speed  = speed;
 	_health = health;
 	_damage = damage;
-	_dead = false;
+	_dead   = false;
+	_theta  = 0.f;
 }
 
 void Enemy::move(Mode::Engine *engine) {

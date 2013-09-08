@@ -12,6 +12,7 @@ void Mode::Engine::init(Window *window, void (*_init)(Engine*), void (*logic)(En
 	_frames = 0;
 	_lastFrame = 0;
 	_instFps = 60;
+	_window->print("Creating engine object...\n");
 }
 
 void Mode::Engine::use(void) {

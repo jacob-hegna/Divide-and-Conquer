@@ -23,10 +23,11 @@ namespace Mode {
 		}
 
 		~Engine(void) {
-			if(_free != nullptr) _free(this);
+			free();
 		}
 		void free(void) {
 			if(_free != nullptr) _free(this);
+			_window->print("Freeing engine object...\n");
 		}
 
 		void init(Window *window, void(*_init)(Engine*), void (*logic)(Engine*), void (*render)(Engine*), void (*free)(Engine*));

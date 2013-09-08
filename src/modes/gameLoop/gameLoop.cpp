@@ -92,6 +92,9 @@ void GameLoop::free(Mode::Engine *engine) {
 }
 
 void GameLoop::camera(Mode::Engine *engine) {
+	int ww = engine->getWindow()->getW(),
+		wh = engine->getWindow()->getH();
+
 	int heroNum = engine->getData<Actors>()->getHeroAmt();
 	float x     = 0, 
 		  y     = 0,
@@ -104,7 +107,7 @@ void GameLoop::camera(Mode::Engine *engine) {
 	}
 	x /= heroNum;
 	y /= heroNum;
-	glTranslatef(400-x, 300-y, 0.f);
+	glTranslatef(ww/2-x, wh/2-y, 0.f);
 	engine->getData<Actors>()->camX = x;
 	engine->getData<Actors>()->camY = y;
 }

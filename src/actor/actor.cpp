@@ -26,11 +26,12 @@ void Actor::getCenter(float *x, float *y)
 	*y = (getCornerY(3) + getCornerY(1))/2;
 }
 
-void Actor::rotate(Actor *dest, float xpos, float ypos, float camx, float camy)
+void Actor::rotate(Actor *dest, float xpos, float ypos, float camx, float camy, Mode::Engine *engine)
 {
 	if(dest != nullptr)
 	{
-		float fx, fy;
+		float fx = 0, 
+		      fy = 0;
 		dest->getCenter(&fx, &fy);
 		xpos = fx;
 		ypos = fy;
@@ -47,11 +48,17 @@ void Actor::rotate(Actor *dest, float xpos, float ypos, float camx, float camy)
 	}
 	else
 	{
-		_theta = asin( (xpos - 400) / (sqrt(pow(xpos-400, 2) + pow(ypos - 300, 2))) );
+		int ww = 800,
+			wh = 600;
+		if(engine != nullptr) {
+			ww = engine->getWindow()->getW();
+			wh = engine->getWindow()->getH();
+		}
+		_theta = asin( (xpos - ww/2) / (sqrt(pow(xpos-ww/2, 2) + pow(ypos - wh/2, 2))) );
 		_theta *= -1;
 		_theta += M_PI/4;
 
-		if(ypos - 600/2 > 0)
+		if(ypos - wh/2 > 0)
 		{
 			_theta += M_PI/2;
 			_theta *= -1;

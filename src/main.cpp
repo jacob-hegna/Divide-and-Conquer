@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 	
-	Window *window = new Window("Divide and Conquer", 50, 50);
+	Window *window = new Window("settings.xml");
 
 	srand(time(0));
 	gameModes(window);

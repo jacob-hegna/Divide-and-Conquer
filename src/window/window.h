@@ -2,9 +2,15 @@
 #define _WINDOW_H
 
 #include <string>
+#include <fstream>
+#include <sys/stat.h>
+#include <iostream>
 
 #define GLFW_INCLUDE_GLU
 #include <GLFW/glfw3.h>
+
+#include "../media/rapidxml/rapidxml.hpp"
+#include "../media/rapidxml/rapidxml_utils.hpp"
 
 class Window
 {
@@ -13,13 +19,7 @@ public:
 		// Nothing to do here...
 	}
 
-	Window(std::string title,
-		   int x, int y,
-		   int w = 800, int h = 600,
-		   int aa = 16,
-		   float r = 1.f,
-		   float g = 1.f,
-		   float b = 1.f);
+	Window(std::string path);
 
 	~Window(void);
 
@@ -36,19 +36,17 @@ public:
 		glfwTerminate();
 	}
 
-	int init(std::string title,
-		      int x, int y,
-		      int w = 800, int h = 600,
-		      int aa = 16,
-		      float r = 1.f,
-		      float g = 1.f,
-		      float b = 1.f);
+	int init(std::string path);
 
 	void render(void) {
 		glfwSwapBuffers(_window);
 	}
 
 	void clear(void);
+
+	void print(std::string text) {
+		fprintf(_outputFile, text.c_str());
+	}
 
 	void setKeyCallback(void (*keyCallBack)(GLFWwindow *window, int key, int scan, int action, int mods)) {
 		glfwSetKeyCallback(_window, keyCallBack);
@@ -93,6 +91,8 @@ private:
 	int _x, _y;
 	int _w, _h;
 	int _aa;
+
+	FILE* _outputFile;
 
 	struct
 	{
