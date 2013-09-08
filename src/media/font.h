@@ -5,8 +5,7 @@
 #include <sstream>
 #include <cstdio>
 
-#include <FTGL/ftgl.h>
-#include <GL/gl.h>
+//#include <FTGL/ftgl.h>
 
 int glPrintf(std::string, float x, float y, std::string path, int size);
 

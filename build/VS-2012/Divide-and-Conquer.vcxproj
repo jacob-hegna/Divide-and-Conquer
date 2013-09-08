@@ -16,9 +16,10 @@
     <ClCompile Include="..\..\src\actor\enemy\enemy.cpp" />
     <ClCompile Include="..\..\src\actor\hero\hero.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
-    <ClCompile Include="..\..\src\media\font\glfont.cpp" />
+    <ClCompile Include="..\..\src\media\font.cpp" />
     <ClCompile Include="..\..\src\modes\engine\engine.cpp" />
     <ClCompile Include="..\..\src\modes\gameLoop\gameLoop.cpp" />
+    <ClCompile Include="..\..\src\modes\menu\gameOver.cpp" />
     <ClCompile Include="..\..\src\modes\menu\pause.cpp" />
     <ClCompile Include="..\..\src\modes\menu\start.cpp" />
     <ClCompile Include="..\..\src\modes\modes.cpp" />
@@ -32,9 +33,14 @@
     <ClInclude Include="..\..\src\actor\bullet\bullet.h" />
     <ClInclude Include="..\..\src\actor\enemy\enemy.h" />
     <ClInclude Include="..\..\src\actor\hero\hero.h" />
-    <ClInclude Include="..\..\src\media\font\glfont.h" />
+    <ClInclude Include="..\..\src\media\font.h" />
+    <ClInclude Include="..\..\src\media\rapidxml\rapidxml.hpp" />
+    <ClInclude Include="..\..\src\media\rapidxml\rapidxml_iterators.hpp" />
+    <ClInclude Include="..\..\src\media\rapidxml\rapidxml_print.hpp" />
+    <ClInclude Include="..\..\src\media\rapidxml\rapidxml_utils.hpp" />
     <ClInclude Include="..\..\src\modes\engine\engine.h" />
     <ClInclude Include="..\..\src\modes\gameLoop\gameLoop.h" />
+    <ClInclude Include="..\..\src\modes\menu\gameOver.h" />
     <ClInclude Include="..\..\src\modes\menu\pause.h" />
     <ClInclude Include="..\..\src\modes\menu\start.h" />
     <ClInclude Include="..\..\src\modes\modes.h" />

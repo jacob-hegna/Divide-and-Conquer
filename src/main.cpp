@@ -1,9 +1,9 @@
-//Standard headers
+// Standard headers
 #include <ctime>
 #include <cstdlib>
 #include <cstdio>
 
-//Project headers
+// Project headers
 #include "window/window.h"
 #include "modes/modes.h"
 

@@ -16,9 +16,6 @@
     <Filter Include="window">
       <UniqueIdentifier>{95dfa18c-5c18-4437-a47a-0148dee5219d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="media\font">
-      <UniqueIdentifier>{b4bdbea3-d4ae-4456-a6b3-35f1c482b551}</UniqueIdentifier>
-    </Filter>
     <Filter Include="actor\bullet">
       <UniqueIdentifier>{a1ca0eac-8d5d-4986-93dc-66a31c3d1f90}</UniqueIdentifier>
     </Filter>
@@ -36,6 +33,9 @@
     </Filter>
     <Filter Include="modes\gameLoop">
       <UniqueIdentifier>{c6eb20ea-5175-4034-b32a-a6778af57ac5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="media\rapidxml">
+      <UniqueIdentifier>{a44a5317-7f5b-4355-baab-fa07e295bb52}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -58,9 +58,6 @@
     <ClCompile Include="..\..\src\modes\menu\start.cpp">
       <Filter>modes\menu</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\media\font\glfont.cpp">
-      <Filter>media\font</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\actor\actor.cpp">
       <Filter>actor</Filter>
     </ClCompile>
@@ -78,6 +75,12 @@
     </ClCompile>
     <ClCompile Include="..\..\src\utilities\util.cpp">
       <Filter>utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\media\font.cpp">
+      <Filter>media</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\modes\menu\gameOver.cpp">
+      <Filter>modes\menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -99,9 +102,6 @@
     <ClInclude Include="..\..\src\modes\menu\start.h">
       <Filter>modes\menu</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\media\font\glfont.h">
-      <Filter>media\font</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\actor\actor.h">
       <Filter>actor</Filter>
     </ClInclude>
@@ -122,6 +122,24 @@
     </ClInclude>
     <ClInclude Include="..\..\src\actor\actors.h">
       <Filter>actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\media\rapidxml\rapidxml.hpp">
+      <Filter>media\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\media\rapidxml\rapidxml_iterators.hpp">
+      <Filter>media\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\media\rapidxml\rapidxml_print.hpp">
+      <Filter>media\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\media\rapidxml\rapidxml_utils.hpp">
+      <Filter>media\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\media\font.h">
+      <Filter>media</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\modes\menu\gameOver.h">
+      <Filter>modes\menu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

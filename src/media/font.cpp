@@ -1,6 +1,6 @@
 #include "font.h"
 
-int glPrintf(std::string data, float x, float y, std::string path, int size) {
+int glPrintf(std::string data, float x, float y, std::string path, int size) {/*
 	// Create a pixmap font from a TrueType file.
 	FTGLPixmapFont font("media/fonts/Liberation.ttf");
 
@@ -11,6 +11,6 @@ int glPrintf(std::string data, float x, float y, std::string path, int size) {
 	// Set the font size and render a small text.
 	glColor3f(1.f, 0.f, 0.f);
 	font.FaceSize(72);
-	font.Render("Hello World!");
+	font.Render("Hello World!");*/
 	return 0;
 }
