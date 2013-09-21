@@ -1,5 +1,7 @@
 #include "gameLoop.h"
 
+#include "../../media/font.h"
+
 bool GameLoop::qBuf = false;
 bool GameLoop::pauseBuf = false;
 
@@ -63,14 +65,6 @@ void GameLoop::logic(Mode::Engine *engine) {
 
 void GameLoop::render(Mode::Engine *engine) {
 	Actors *actors = engine->getData<Actors>();
-	
-	// fps
-
-	// kill count
-	//glPrintf(actors->heroKills, "media/fonts/largeArial.glf", 10, 520);
-
-	// points
-	//glPrintf(actors->heroPoints, "media/fonts/largeArial.glf", 10, 560);
 
 	// HUD code goes above this line
 	GameLoop::camera(engine);

@@ -9,8 +9,8 @@
 #define GLFW_INCLUDE_GLU
 #include <GLFW/glfw3.h>
 
-#include "../media/rapidxml/rapidxml.hpp"
-#include "../media/rapidxml/rapidxml_utils.hpp"
+#include <rapidxml/rapidxml.hpp>
+#include <rapidxml/rapidxml_utils.hpp>
 
 class Window
 {
@@ -45,7 +45,7 @@ public:
 	void clear(void);
 
 	void print(std::string text) {
-		fprintf(_outputFile, text.c_str());
+		fprintf(_outputFile, "%s", text.c_str());
 	}
 
 	void setKeyCallback(void (*keyCallBack)(GLFWwindow *window, int key, int scan, int action, int mods)) {

@@ -2,7 +2,8 @@
 #define _ENGINE_H
 
 #include <GLFW/glfw3.h>
-#include <cstdlib>
+#include <string>
+#include <boost/lexical_cast.hpp>
 
 #include "../../window/window.h"
 #include "../../media/font.h"

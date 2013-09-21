@@ -1,17 +1,29 @@
-SOURCE_FILES = src/main.cpp src/media/font.cpp src/window/window.cpp src/utilities/util.cpp src/utilities/timer.cpp src/modes/modes.cpp src/modes/engine/engine.cpp src/modes/gameLoop/gameLoop.cpp src/modes/menu/pause.cpp src/modes/menu/start.cpp src/modes/menu/gameOver.cpp src/actor/actor.cpp src/actor/bullet/bullet.cpp src/actor/enemy/enemy.cpp src/actor/hero/hero.cpp
+BUILDDIR    = bin/
+INCLUDEDIR  = include/
+SOURCEDIR   = src/
 
-FLAGS = -w -O3 -std=c++0x
+DIRS        = $(wildcard $(SOURCEDIR)*/)
+VPATH       = $(SOURCEDIR):$(DIRS):$(foreach dir, $(DIRS), $(wildcard $(dir)*/))
 
-LINKER = -lGL -lGLU -lglfw3 -lXrandr -lXi -lftgl
+IFILES     := $(shell find $(SOURCEDIR) -name '*.cpp')
+OFILES     := $(subst $(SOURCEDIR), $(BUILDDIR), $(addsuffix .o, $(notdir $(shell find $(SOURCEDIR) -name '*.cpp'))))
 
-INCLUDE = -I/usr/include/freetype2
+CC          = clang
+CCFLAGS     = -c -Wall -O3 -std=c++0x -I$(INCLUDEDIR)
+LINKFLAGS   = -lGL -lGLU -lglfw3 -lXrandr -lXi -lGLC
+DYNLINK     = /usr/lib/x86_64-linux-gnu/libX11.so /usr/lib/x86_64-linux-gnu/libXxf86vm.so
 
-EXEC_NAME = Divide-and-Conquer
+EXEC = Divide-and-Conquer
 
-all: g++
+all: $(EXEC)
 
-g++:
-	g++ -g $(FLAGS) $(SOURCE_FILES) $(INCLUDE) $(LINKER) -o $(EXEC_NAME) /usr/lib/x86_64-linux-gnu/libX11.so /usr/lib/x86_64-linux-gnu/libXxf86vm.so
+$(EXEC): $(OFILES)
+	$(CC) $(foreach file, $^, $(BUILDDIR)$(file)) $(LINKFLAGS) -o $@ $(DYNLINK)
 
-clang:
-	clang -g $(FLAGS) $(SOURCE_FILES) $(INCLUDE) $(LINKER) -o $(EXEC_NAME) /usr/lib/x86_64-linux-gnu/libX11.so /usr/lib/x86_64-linux-gnu/libXxf86vm.so
+%.cpp.o: %.cpp
+	$(CC) $(CCFLAGS) $< -o $(BUILDDIR)$@
+
+.PHONY: clean
+clean:
+	rm $(BUILDDIR)*
+	rm $(EXEC)

@@ -2,11 +2,14 @@
 #define _FONT_H
 
 #include <string>
-#include <sstream>
-#include <cstdio>
+#include <GLFW/glfw3.h>
+#include <GL/glc.h>
 
-//#include <FTGL/ftgl.h>
+void glPrintfInit(void);
 
-int glPrintf(std::string, float x, float y, std::string path, int size);
+void glPrintf(std::string text, 
+	             float w, float h, 
+	             float x, float y, 
+	             float r, float g, float b);
 
 #endif

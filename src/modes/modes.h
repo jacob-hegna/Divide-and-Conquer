@@ -7,8 +7,10 @@ enum GameModeType {
 	GAME_LOOP,
 	START_MENU,
 	PAUSE_MENU,
+	SETTINGS_MENU,
 	GAME_OVER
 };
+static const int gameModeAmt = 5;
 
 extern GameModeType globalGameMode;
 

@@ -1,6 +1,7 @@
 #include "bullet.h"
 
 #include <cmath>
+#include "../../utilities/util.h"
 
 Gun gun[5];
 
@@ -15,8 +16,7 @@ void Bullet::init(float px, float py, float ptheta, GunType type)
     _damage = gun[type].damage;
     _dead  = false;
 
-	_theta -= gun[type].acc/2;
-	_theta += (float)rand()/((float)RAND_MAX/gun[type].acc);
+    _theta += randF(-gun[type].acc, gun[type].acc);
 
 	_type = type;
 }

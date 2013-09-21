@@ -16,20 +16,24 @@ void Mode::Engine::init(Window *window, void (*_init)(Engine*), void (*logic)(En
 }
 
 void Mode::Engine::use(void) {
-	if(_frames - _lastFrame >= 60) {
-		if(_lastFrame >= 60) _instFps = 60/_timer.getInstant();
+	if(_frames - _lastFrame >= 30) {
+		if(_lastFrame >= 30) _instFps = 30/_timer.getInstant();
 		_timer.setInstant();
 		_lastFrame = _frames;
 	}
-	glPushMatrix();
+	glLoadIdentity();
+	//glPushMatrix();
 	_window->clear();
+
+    // glPrintf(boost::lexical_cast<std::string>((int)_instFps), 
+    //			 24, 24, 10, 34, 0, 0, 0);
 
 	if(_logic != nullptr) _logic(this);
 	if(_render != nullptr) _render(this);
 
 	_window->render();
 
-	glPopMatrix();
+	//glPopMatrix();
 	glfwPollEvents();
 	++_frames;
 }
