@@ -2,11 +2,6 @@
 
 using namespace rapidxml;
 
-Window::Window(std::string path)
-{
-	init(path);
-}
-
 Window::~Window(void) {
 	free();
 }
@@ -17,12 +12,12 @@ void Window::free(void) {
 	fclose(_outputFile);
 }
 
-int Window::init(std::string path)
+int Window::init(void)
 {
 	// Input
 	struct stat buffer;
-	if(stat(path.c_str(), &buffer) == 0) {
-		file<> xmlFile(path.c_str());
+	if(stat("settings.xml", &buffer) == 0) {
+		file<> xmlFile("settings.xml");
 		xml_document<> doc;
 		doc.parse<0>(xmlFile.data());
 		xml_node<> *root = doc.first_node("window");
@@ -60,13 +55,17 @@ int Window::init(std::string path)
 		_outputFile = fopen(rootAddr->value(), "w");
 
 	} else {
-		std::ofstream ofile(path);
+		std::ofstream ofile("settings.xml");
 		ofile << "<window title=\"Divide and Conquer\" aa=\"16\">"                          << std::endl
-			  << "     <pos  x=\"15\" y=\"15\"/>"                                           << std::endl
-			  << "     <size w=\"800\" h=\"600\" fullscreen=\"0\"/>"                        << std::endl
-			  << "     <color r=\"1\" g=\"1\" b=\"1\"/>"                                    << std::endl
+			  << "  <pos  x=\"15\" y=\"15\"/>"                                              << std::endl
+			  << "  <size w=\"800\" h=\"600\" fullscreen=\"0\"/>"                           << std::endl
+			  << "  <color r=\"1\" g=\"1\" b=\"1\"/>"                                       << std::endl
 		      << "</window>"                                                                << std::endl
-		      << "<output path=\"stdio.txt\"/>"                                             << std::endl;
+		      << "<output path=\"stdio.txt\"/>"                                             << std::endl
+		      << "<guns>"                                                                   << std::endl
+		      << "  <gun name=\"pistol\" w=\"4\" h=\"4\" s=\"650\" d=\"20\" a=\"0.1f\"/>"   << std::endl
+		      << "  <gun name=\"gatling\" w=\"3\" h=\"3\" s=\"650\" d=\"1\" a=\"0.5f\"/>"   << std::endl
+		      << "</guns>"                                                                  << std::endl;
 		ofile.close();
 		_outputFile = fopen("stdio.txt", "w");
 		_clearColor.r = 1.f;

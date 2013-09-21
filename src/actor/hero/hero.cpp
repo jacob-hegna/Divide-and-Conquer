@@ -16,7 +16,7 @@ void Hero::init(float x, float y,
 	_h       = h;
 	_speed   = speed;
 	_health  = health;
-	_gunType = GATLING;
+	_gunType = 1;
 	_dead    = false;
 	_theta   = 0.f;
 }
@@ -72,7 +72,7 @@ void Hero::_getDamage(Mode::Engine *engine) {
 
 void Hero::shoot(Mode::Engine *engine) {
 	if(glfwGetMouseButton(engine->getWindow()->getWindow(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
-		if(gun[_gunType].delay != -1) {
+		if(guns[_gunType].delay != -1) {
 			_bullet->push_back(new Bullet(cos(_theta*-1 - M_PI/4)*_w/2+_x+_w/2, sin(_theta*-1 - M_PI/4)*_h/2+_y+_h/2, (_theta*-1)-M_PI/4, _gunType));
 		} else {
 			if(!_mouseBuffer) {

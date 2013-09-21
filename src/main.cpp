@@ -21,7 +21,8 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 	
-	Window *window = new Window("settings.xml");
+	Window *window = new Window;
+	window->init();
 
 	srand(time(0));
 	gameModes(window);

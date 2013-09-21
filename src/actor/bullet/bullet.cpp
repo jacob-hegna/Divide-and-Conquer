@@ -3,22 +3,21 @@
 #include <cmath>
 #include "../../utilities/util.h"
 
-Gun gun[5];
+std::vector<Gun> guns;
 
-void Bullet::init(float px, float py, float ptheta, GunType type)
+void Bullet::init(float px, float py, float ptheta, int type)
 {
-    _speed  = gun[type].speed;
-    _w      = gun[type].bW;
-    _h      = gun[type].bH;
+    _type = type;
+    _speed  = guns[_type].speed;
+    _w      = guns[_type].bW;
+    _h      = guns[_type].bH;
     _x      = px-_w/2;
     _y      = py-_h/2;
     _theta  = ptheta;
-    _damage = gun[type].damage;
+    _damage = guns[_type].damage;
     _dead  = false;
 
-    _theta += randF(-gun[type].acc, gun[type].acc);
-
-	_type = type;
+    _theta += randF(-guns[_type].acc, guns[_type].acc);
 }
 
 void Bullet::move(Mode::Engine *engine)
@@ -42,38 +41,29 @@ void Bullet::render(void)
 }
 
 void Bullet::initGuns( void ) {
-    gun[PISTOL].bH    = 4;
-    gun[PISTOL].bW     = 4;
-    gun[PISTOL].speed  = 650;
-    gun[PISTOL].damage = 20;
-    gun[PISTOL].delay  = -1;
-	gun[PISTOL].acc    = .1f;
+    using namespace rapidxml;
+    file<> xmlFile("settings.xml");
+    xml_document<> doc;
+    doc.parse<0>(xmlFile.data());
+    xml_node<> *root = doc.first_node("guns");
 
-    gun[SNIPER].bH     = 8;
-    gun[SNIPER].bW     = 8;
-    gun[SNIPER].speed  = 650;
-    gun[SNIPER].damage = 50;
-    gun[SNIPER].delay  = -1;
-	gun[SNIPER].acc    = 0;
+    for(xml_node<> *curNode=root->first_node("gun"); curNode; curNode=curNode->next_sibling())
+    {
+        Gun gun;
 
-    gun[RPG].bH     = 25;
-    gun[RPG].bW     = 25;
-    gun[RPG].speed  = 650;
-    gun[RPG].damage = 100;
-    gun[RPG].delay  = -1;
-	gun[RPG].acc    = .25;
+        xml_attribute<> *attr = curNode->first_attribute("name");
+        gun.name = attr->value();
+        attr = attr->next_attribute("w");
+        gun.bW = atoi(attr->value());
+        attr = attr->next_attribute("h");
+        gun.bH = atof(attr->value());
+        attr = attr->next_attribute("s");
+        gun.speed = atof(attr->value());
+        attr = attr->next_attribute("d");
+        gun.damage = atof(attr->value());
+        attr = attr->next_attribute("a");
+        gun.acc = atof(attr->value());
 
-    gun[GATLING].bH     = 3;
-    gun[GATLING].bW     = 3;
-    gun[GATLING].speed  = 650;
-    gun[GATLING].damage = 1;
-    gun[GATLING].delay  = .001f;
-	gun[GATLING].acc    = .5f;
-
-	gun[SHOTGUN].bH     = 4;
-	gun[SHOTGUN].bW     = 4;
-	gun[SHOTGUN].speed  = 650;
-	gun[SHOTGUN].damage = 13;
-	gun[SHOTGUN].delay  = -1;
-	gun[SHOTGUN].acc    = .1f;
+        guns.push_back(gun);
+    }
 }

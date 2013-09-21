@@ -33,7 +33,7 @@ void Enemy::move(Mode::Engine *engine) {
 			bullet->at(i)->getY() > _y &&
 			bullet->at(i)->getY() < _y + _h) {
 				if(_health > 0) {
-					_health-=gun[bullet->at(i)->getType()].damage;
+					_health-=guns[bullet->at(i)->getType()].damage;
 				} else {
 					_dead = true;
 					++engine->getData<Actors>()->heroKills;

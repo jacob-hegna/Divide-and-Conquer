@@ -1,38 +1,35 @@
 #ifndef _BULLET_H
 #define _BULLET_H
 
+#include <vector>
+#include <string>
+#include <rapidxml/rapidxml.hpp>
+#include <rapidxml/rapidxml_utils.hpp>
+
 #include "../actor.h"
 #include "../../modes/engine/engine.h"
 
-enum GunType 
-{
-	PISTOL,
-	SNIPER,
-	RPG,
-	GATLING,
-	SHOTGUN
-};
-
 struct Gun {
+	std::string name;
     float speed;
     int bW, bH;
     float damage;
     float delay;
 	float acc;
 };
-extern Gun gun[5];
+extern std::vector<Gun> guns;
 
 class Bullet : public Actor
 {
 private:
-	GunType _type;
+	int   _type;
     float _damage;
 public:
     Bullet(void) {
 		// Nothing to do here...
 	}
     
-	Bullet(float x, float y, float theta, GunType type) {
+	Bullet(float x, float y, float theta, int type) {
 		init(x, y, theta, type);
 	}
 
@@ -41,7 +38,7 @@ public:
 	}
 
 	static void initGuns( void );
-    void init(float x, float y, float theta, GunType type);
+    void init(float x, float y, float theta, int type);
     void move(Mode::Engine *engine);
 	void render();
 
@@ -53,7 +50,7 @@ public:
 	float getY(void) {
 		return _y;
 	}
-	GunType getType(void) {
+	int getType(void) {
 		return _type;
 	}
 };

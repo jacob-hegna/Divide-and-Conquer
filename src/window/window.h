@@ -19,8 +19,6 @@ public:
 		// Nothing to do here...
 	}
 
-	Window(std::string path);
-
 	~Window(void);
 
 	void free(void);
@@ -36,7 +34,7 @@ public:
 		glfwTerminate();
 	}
 
-	int init(std::string path);
+	int init(void);
 
 	void render(void) {
 		glfwSwapBuffers(_window);
