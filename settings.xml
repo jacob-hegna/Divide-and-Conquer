@@ -1,0 +1,6 @@
+<window title="Divide and Conquer" aa="16">
+     <pos  x="15" y="15"/>
+     <size w="800" h="600" fullscreen="0"/>
+     <color r="1" g="1" b="1"/>
+</window>
+<output path="stdio.txt"/>
