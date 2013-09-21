@@ -17,16 +17,16 @@ You should have received a copy of the GNU General Public License along with thi
 ## Building are running on Linux
 Clone the repo:
 
-'''
+```
 git clone https://github.com/jacob-hegna/Divide-and-Conquer
-'''
+```
 
 Move to the game folder and build.
 
-'''
+```
 cd Divide-and-Conquer
 make
-'''
+```
 
 ## Settings
 Settings are stored in xml within a file called settings.xml.  You can enable fullscreen, change the window size, and change the window position.
