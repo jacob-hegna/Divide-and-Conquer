@@ -28,8 +28,14 @@ cd Divide-and-Conquer
 make
 ```
 
+## Controls
+'wasd' moves the hero
+'q' divides the hero
+'1..9' switches the gun that the hero has equipped
+left click to shoot
+
 ## Dependencies
-To build Divide-and-Conquer, you will need the OpenGL headers/libs and the glfw3 headers/libs.  RapidXML is used, but it is included in the project
+To build Divide-and-Conquer, you will need the OpenGL headers/libs and the glfw3 headers/libs.  You will also need the OGLFT font rendering library.  RapidXML is used, but it is included in the project
 
 ## Settings
 Settings are stored in xml within a file called settings.xml.  You can enable fullscreen, change the window size, and change the settings of various weapons.
