@@ -26,4 +26,4 @@ $(TARGET): $(OFILES)
 .PHONY: clean
 clean:
 	rm $(BUILDDIR)*
-	rm $(EXEC)
+	rm $(TARGET)
