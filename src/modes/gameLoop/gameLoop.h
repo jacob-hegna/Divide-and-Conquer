@@ -8,6 +8,8 @@
 #include "../../actor/actors.h"
 
 #include <cstdlib>
+#include <string>
+#include <boost/lexical_cast.hpp>
 
 namespace GameLoop {
 	extern bool qBuf, pauseBuf;

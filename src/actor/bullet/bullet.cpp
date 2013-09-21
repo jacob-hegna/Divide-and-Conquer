@@ -59,8 +59,10 @@ void Bullet::initGuns( void ) {
         gun.bH = atof(attr->value());
         attr = attr->next_attribute("s");
         gun.speed = atof(attr->value());
-        attr = attr->next_attribute("d");
+        attr = attr->next_attribute("da");
         gun.damage = atof(attr->value());
+        attr = attr->next_attribute("de");
+        gun.delay = atof(attr->value());
         attr = attr->next_attribute("a");
         gun.acc = atof(attr->value());
 

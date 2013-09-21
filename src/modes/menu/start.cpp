@@ -16,5 +16,5 @@ void StartMenu::logic(Mode::Engine *engine) {
 #include <cstdio>
 
 void StartMenu::render(Mode::Engine *engine) {
-	//glPrintf("Start", 30, 30, "media/fonts/Liberation.ttf", 12);
+	Font::print("Divide and Conquer", 15, 39);
 }

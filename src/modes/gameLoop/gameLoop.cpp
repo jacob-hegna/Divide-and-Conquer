@@ -49,6 +49,14 @@ void GameLoop::logic(Mode::Engine *engine) {
 		GameLoop::qBuf = false;
 	}
 
+	for(int i = GLFW_KEY_1; i < GLFW_KEY_9; ++i) {
+		if(engine->getWindow()->getKey(i)) {
+			for(int j = 0; j < actors->getHeroAmt(); ++j) {
+				actors->getHero(j)->setType(i-GLFW_KEY_1);
+			}
+		}
+	}
+
 	if(engine->getWindow()->getKey(GLFW_KEY_ESCAPE)) {
 		if(!GameLoop::pauseBuf) {
 			globalGameMode = PAUSE_MENU;
@@ -65,6 +73,8 @@ void GameLoop::logic(Mode::Engine *engine) {
 
 void GameLoop::render(Mode::Engine *engine) {
 	Actors *actors = engine->getData<Actors>();
+
+	Font::print(boost::lexical_cast<std::string>((int)engine->getInstFps()), 15, 39);
 
 	// HUD code goes above this line
 	GameLoop::camera(engine);

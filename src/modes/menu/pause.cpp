@@ -25,5 +25,5 @@ void PauseMenu::logic(Mode::Engine *engine) {
 }
 
 void PauseMenu::render(Mode::Engine *engine) {
-	//glPrintf("Paused", "media/fonts/largeArial.glf", 10, 10);
+	Font::print("Paused", 15, 39);
 }

@@ -39,6 +39,15 @@ public:
 		return _bullet;
 	}
 
+	bool setType(int type) {
+		if(type < guns.size()) {
+			_gunType = type;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	void free(void);
 
 private:

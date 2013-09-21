@@ -25,8 +25,6 @@ void Mode::Engine::use(void) {
 	//glPushMatrix();
 	_window->clear();
 
-    Font::print(boost::lexical_cast<std::string>((int)_instFps), 15, 39);
-
 	if(_logic != nullptr) _logic(this);
 	if(_render != nullptr) _render(this);
 
