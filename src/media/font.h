@@ -3,13 +3,13 @@
 
 #include <string>
 #include <GLFW/glfw3.h>
-#include <GL/glc.h>
+#include <oglft/OGLFT.h>
 
-void glPrintfInit(void);
-
-void glPrintf(std::string text, 
-	             float w, float h, 
-	             float x, float y, 
-	             float r, float g, float b);
+namespace Font {
+    extern OGLFT::Monochrome *face;
+    void init(void);
+    void print(std::string, float, float);
+    void deinit(void);
+};
 
 #endif

@@ -10,7 +10,7 @@ OFILES     := $(subst $(SOURCEDIR), $(BUILDDIR), $(addsuffix .o, $(notdir $(shel
 
 CC          = g++
 CCFLAGS     = -c -w -O3 -std=c++0x -I$(INCLUDEDIR)
-LINKFLAGS   = -lGL -lGLU -lglfw3 -lXrandr -lXi -lGLC
+LINKFLAGS   = -lGL -lGLU -lglfw3 -lXrandr -lXi -lOGLFT
 DYNLINK     = /usr/lib/x86_64-linux-gnu/libX11.so /usr/lib/x86_64-linux-gnu/libXxf86vm.so
 
 TARGET = Divide-and-Conquer

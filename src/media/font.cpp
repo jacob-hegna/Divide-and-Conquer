@@ -1,16 +1,17 @@
 #include "font.h"
 
-void glPrintfInit(void) {
-	glcEnable(GL_TRUE);
-	glcContext(glcGenContext());
+OGLFT::Monochrome *Font::face = nullptr;
+
+void Font::init(void) {
+    face = new OGLFT::Monochrome("media/arial.ttf", 24);
+    face->setForegroundColor(0,0,0);
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+}  
+
+void Font::print(std::string data, float x, float y) {
+    face->draw(x, y, data.c_str());
 }
 
-void glPrintf(std::string text, 
-	             float w, float h, 
-	             float x, float y, 
-	             float r, float g, float b) {
-	glcScale(w, h);
-	glColor4f(r, g, b, 1.f);
-	glRasterPos2f(x, y);
-	glcRenderString(text.c_str());
+void Font::deinit(void) {
+    delete face;
 }

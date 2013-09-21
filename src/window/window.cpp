@@ -61,12 +61,12 @@ int Window::init(std::string path)
 
 	} else {
 		std::ofstream ofile(path);
-		ofile << "<window title=\"Divide and Conquer\" aa=\"16\">"   << std::endl
-			  << "     <pos  x=\"15\" y=\"15\"/>"                    << std::endl
-			  << "     <size w=\"800\" h=\"600\" fullscreen=\"0\"/>" << std::endl
-			  << "     <color r=\"1\" g=\"1\" b=\"1\"/>"             << std::endl
-		      << "</window>"                                         << std::endl
-		      << "<output path=\"stdio.txt\"/>"                      << std::endl;
+		ofile << "<window title=\"Divide and Conquer\" aa=\"16\">"                          << std::endl
+			  << "     <pos  x=\"15\" y=\"15\"/>"                                           << std::endl
+			  << "     <size w=\"800\" h=\"600\" fullscreen=\"0\"/>"                        << std::endl
+			  << "     <color r=\"1\" g=\"1\" b=\"1\"/>"                                    << std::endl
+		      << "</window>"                                                                << std::endl
+		      << "<output path=\"stdio.txt\"/>"                                             << std::endl;
 		ofile.close();
 		_outputFile = fopen("stdio.txt", "w");
 		_clearColor.r = 1.f;

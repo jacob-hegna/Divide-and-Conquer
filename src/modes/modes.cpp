@@ -23,9 +23,10 @@ void gameModes(Window *window) {
 	engine[PAUSE_MENU]->init(window,    PauseMenu::init, PauseMenu::logic,    PauseMenu::render,    nullptr);
 	engine[SETTINGS_MENU]->init(window, nullptr,         SettingsMenu::logic, SettingsMenu::render, nullptr);
 	engine[GAME_OVER]->init(window,     nullptr,         nullptr,             GameOver::render,     nullptr);
-	glPrintfInit();
 
-	do {
+    Font::init();
+
+    do {
 		engine[globalGameMode]->use();
 	} while( !window->shouldClose() );
 
@@ -34,5 +35,6 @@ void gameModes(Window *window) {
 		free(engine[i]);
 	}
 
+    Font::deinit();
 	delete [] engine;
 }
