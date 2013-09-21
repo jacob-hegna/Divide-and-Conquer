@@ -28,6 +28,9 @@ cd Divide-and-Conquer
 make
 ```
 
+## Dependencies
+To build Divide-and-Conquer, you will need the OpenGL headers/libs and the glfw3 headers/libs.  RapidXML is used, but it is included in the project
+
 ## Settings
 Settings are stored in xml within a file called settings.xml.  You can enable fullscreen, change the window size, and change the window position.
 
