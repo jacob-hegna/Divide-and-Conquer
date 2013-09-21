@@ -30,8 +30,11 @@ make
 
 ## Controls
 'wasd' moves the hero
+
 'q' divides the hero
+
 '1..9' switches the gun that the hero has equipped
+
 left click to shoot
 
 ## Dependencies
