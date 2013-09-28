@@ -11,7 +11,7 @@
 
 void Actor::render(void) {
 	if(!_dead) {
-		glColor3f(1.f, 0.f, 0.f);
+		glColor4f(1.f, 0.f, 0.f, _health/_mhealth);
 		glBegin(GL_QUADS);
 			for(int i = 0; i < 4; ++i) {
 				glVertex2f(_coords.x[i], _coords.y[i]);

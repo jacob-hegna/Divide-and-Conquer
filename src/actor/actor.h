@@ -74,6 +74,7 @@ protected:
 	float _theta;
 	float _speed;
 	float _health;
+	float _mhealth;
 	bool  _dead;
 
 

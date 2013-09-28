@@ -15,6 +15,7 @@ void Hero::init(float x, float y,
 	_w       = w;
 	_h       = h;
 	_speed   = speed;
+	_mhealth = health;
 	_health  = health;
 	_gunType = 1;
 	_dead    = false;
@@ -27,7 +28,7 @@ void Hero::render(void) {
 		_bullet->at(i)->render();
 	}
 
-	glColor3f(5.f/_health, 0.f, _health/100.f);
+	glColor4f(5.f/_health, 0.f, _health/100.f, _health/_mhealth);
 	glBegin(GL_QUADS);
 		for(int i = 0; i < 4; ++i) {
 			glVertex2f(_coords.x[i], _coords.y[i]);

@@ -80,6 +80,17 @@ void GameLoop::render(Mode::Engine *engine) {
 	GameLoop::camera(engine);
 	// Game code goes below this line
 
+	//temp background for a sense of direction and speed
+	for(int i = -100; i < 100; ++i) {
+		for(int j = -100; j < 100; ++j) {
+			glColor3f(1.f, 0.f, 1.f);
+			glPointSize(2.f);
+			glBegin(GL_POINTS);
+				glVertex2d(i*100, j*100);
+			glEnd();
+		}
+	}
+
 	for(int i = 0; i < actors->getHeroAmt(); ++i) {
 		actors->getHero(i)->render();
 	}

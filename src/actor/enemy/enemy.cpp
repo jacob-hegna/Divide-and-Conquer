@@ -9,15 +9,16 @@ void Enemy::init(float x, float y,
 				 float health,
 				 float damage)
 {
-	_x      = x;
-	_y      = y;
-	_w      = w;
-	_h      = h;
-	_speed  = speed;
-	_health = health;
-	_damage = damage;
-	_dead   = false;
-	_theta  = 0.f;
+	_x       = x;
+	_y       = y;
+	_w       = w;
+	_h       = h;
+	_speed   = speed;
+	_mhealth = health;
+	_health  = health;
+	_damage  = damage;
+	_dead    = false;
+	_theta   = 0.f;
 }
 
 void Enemy::move(Mode::Engine *engine) {
