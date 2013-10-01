@@ -3,11 +3,19 @@
 void Timer::init( double (*timerFunc)(void) ) {
 	_timerFunc = timerFunc;
 	_start = _timerFunc();
-	_total = 0;
 }
 
 void Timer::update( void ) {
-	_total = _timerFunc() - _start;
+	_total.push_back(_timerFunc() - _start);
+	_start = _timerFunc();
+}
+
+double Timer::getTime(void) {
+	float sum = 0.f;
+	for(int i = 0; i < _total.size(); ++i) {
+		sum += _total.at(i);
+	}
+	return sum;
 }
 
 void Timer::setInstant( void ) {
@@ -20,6 +28,12 @@ double Timer::getInstant( void ) {
 
 void Timer::reset( void ) {
 	_start = _timerFunc();
-	_total = 0;
-	_begin = 0;
+}
+
+void Timer::pause(void) {
+
+}
+
+void Timer::unpause(void) {
+	_start = _timerFunc();
 }

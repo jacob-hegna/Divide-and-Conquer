@@ -7,8 +7,12 @@ Window::~Window(void) {
 }
 
 void Window::free(void) {
-	print("Freeing GLFW window and OpenGL context...\n");
+	_time = glfwGetTime() - _stime;
 	glfwDestroyWindow(_window);
+
+	fprintf(_outputFile, "Total time: %.1f\n", _time);
+	fprintf(_outputFile, "Total frames: %i\n", _frames);
+	fprintf(_outputFile, "Average FPS: %.1f\n", (float)_frames/_time);
 	fclose(_outputFile);
 }
 
@@ -61,7 +65,7 @@ int Window::init(void)
 			  << "  <size w=\"800\" h=\"600\" fullscreen=\"0\"/>"                                              << std::endl
 			  << "  <color r=\"1\" g=\"1\" b=\"1\"/>"                                                          << std::endl
 		      << "</window>"                                                                                   << std::endl
-		      << "<output path=\"stdio.txt\"/>"                                                                << std::endl
+		      << "<output path=\"stdout.txt\"/>"                                                                << std::endl
 		      << "<guns>"                                                                                      << std::endl
 		      << "  <gun name=\"pistol\" w=\"4\" h=\"4\" s=\"650\" da=\"20\" de=\"-1\" a=\"0.1f\"/>"           << std::endl
 		      << "  <gun name=\"gatling\" w=\"3\" h=\"3\" s=\"650\" da=\"1\" de=\"0.001f\" a=\"0.5f\"/>"       << std::endl
@@ -69,7 +73,7 @@ int Window::init(void)
 		      << "  <gun name=\"RPG\" w=\"25\" h=\"25\" s=\"550\" da=\"150\" de=\"-1\" a=\"0.15f\"/>"          << std::endl
 		      << "</guns>"                                                                  << std::endl;
 		ofile.close();
-		_outputFile = fopen("stdio.txt", "w");
+		_outputFile = fopen("stdout.txt", "w");
 		_clearColor.r = 1.f;
 		_clearColor.g = 1.f;
 		_clearColor.b = 1.f;
@@ -82,27 +86,26 @@ int Window::init(void)
 		_fc = false;
 	}
 
+	_time    = 0;
+	_frames  = 0;
+	_stime   = glfwGetTime(); 
+ 
 	// Output
-	print("+------------------------------------+\n");
-	print("| Output file for Divide-and-Conquer |\n");
-	print("+------------------------------------+\n");
+	fprintf(_outputFile, "+------------------------------------+\n");
+	fprintf(_outputFile, "| Output file for Divide-and-Conquer |\n");
+	fprintf(_outputFile, "+------------------------------------+\n");
 
 	glfwWindowHint(GLFW_SAMPLES, _aa);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-	print("Opening window...");
 	_window = glfwCreateWindow(_w, _h, _title.c_str(), (_fc) ? glfwGetPrimaryMonitor() : nullptr, nullptr);
 
 	if(!_window) {
 		glfwDestroyWindow(_window);
-		print("failed!\n");
 		return -1;
 	}
-	print("done!\n");
 
 	glfwSetWindowPos(_window, _x, _y);
-
-	print("Setting up OpenGL...\n");
 
 	glfwMakeContextCurrent(_window);
 

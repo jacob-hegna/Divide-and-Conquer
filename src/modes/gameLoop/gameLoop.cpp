@@ -61,12 +61,14 @@ void GameLoop::logic(Mode::Engine *engine) {
 		if(!GameLoop::pauseBuf) {
 			globalGameMode = PAUSE_MENU;
 			GameLoop::pauseBuf = true;
+			engine->switch_();
 		}
 	} else {
 		GameLoop::pauseBuf = false;
 	}
 
 	if(actors->getHeros()->empty()) {
+		engine->switch_();
 		globalGameMode = GAME_OVER;
 	}
 }

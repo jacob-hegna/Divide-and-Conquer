@@ -42,8 +42,9 @@ public:
 
 	void clear(void);
 
-	void print(std::string text) {
-		fprintf(_outputFile, "%s", text.c_str());
+	// If you need to do variable printing
+	FILE** getFile(void) {
+		return &_outputFile;
 	}
 
 	void setKeyCallback(void (*keyCallBack)(GLFWwindow *window, int key, int scan, int action, int mods)) {
@@ -82,6 +83,10 @@ public:
 		return _h;
 	}
 
+	void incFrames(void) {
+		++_frames;
+	}
+
 private:
 	GLFWwindow *_window;
 
@@ -92,6 +97,10 @@ private:
 	int _aa;
 
 	FILE* _outputFile;
+
+	int  _frames;
+	float _time,
+		 _stime;
 
 	struct
 	{

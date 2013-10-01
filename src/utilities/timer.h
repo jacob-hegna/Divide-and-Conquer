@@ -1,6 +1,9 @@
 #ifndef _TIMER_H
 #define _TIMER_H
 
+#include <vector>
+#include <cstdio>
+
 class Timer {
 public:
 	Timer( void ) {
@@ -22,23 +25,22 @@ public:
 	void setInstant( void );
 	double getInstant( void );
 
-	double getTime( void ) {
-		return _total;
-	}
+	void pause(void);
+	void unpause(void);
+
+	double getTime( void );
 
 	void free( void ) {
 		// nothing to free...
 	}
 
 private:
-	double _start,
-	       _total;
+	float _start;
+	std::vector<float> _total;
 
 	double _instStart;
 
 	double (*_timerFunc)(void);
-
-	double _begin;
 };
 
 #endif

@@ -18,11 +18,11 @@ void gameModes(Window *window) {
 	}
 
 	// Start initialization of all the engine objects
-	engine[GAME_LOOP]->init(window,     GameLoop::init,  GameLoop::logic,     GameLoop::render,     GameLoop::free);
-	engine[START_MENU]->init(window,    StartMenu::init, StartMenu::logic,    StartMenu::render,    nullptr);
-	engine[PAUSE_MENU]->init(window,    PauseMenu::init, PauseMenu::logic,    PauseMenu::render,    nullptr);
-	engine[SETTINGS_MENU]->init(window, nullptr,         SettingsMenu::logic, SettingsMenu::render, nullptr);
-	engine[GAME_OVER]->init(window,     nullptr,         nullptr,             GameOver::render,     nullptr);
+	engine[GAME_LOOP]->init(window,     GameLoop::init,  GameLoop::logic,     GameLoop::render,     GameLoop::free, "Game Loop");
+	engine[START_MENU]->init(window,    StartMenu::init, StartMenu::logic,    StartMenu::render,    nullptr, "Start Menu");
+	engine[PAUSE_MENU]->init(window,    PauseMenu::init, PauseMenu::logic,    PauseMenu::render,    nullptr, "Pause Menu");
+	engine[SETTINGS_MENU]->init(window, nullptr,         SettingsMenu::logic, SettingsMenu::render, nullptr, "Settings Menu");
+	engine[GAME_OVER]->init(window,     nullptr,         nullptr,             GameOver::render,     nullptr, "Game Over");
 
     Font::init();
 

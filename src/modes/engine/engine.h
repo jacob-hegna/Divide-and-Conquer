@@ -18,8 +18,8 @@ namespace Mode {
 			//Nothing to do here...
 		}
 
-		Engine(Window *window, void (*_init)(Engine*), void (*logic)(Engine*), void (*render)(Engine*), void (*free)(Engine*)) {
-			init(window, _init, logic, render, free);
+		Engine(Window *window, void (*_init)(Engine*), void (*logic)(Engine*), void (*render)(Engine*), void (*free)(Engine*), const char* name) {
+			init(window, _init, logic, render, free, name);
 		}
 
 		~Engine(void) {
@@ -27,12 +27,20 @@ namespace Mode {
 		}
 		void free(void) {
 			if(_free != nullptr) _free(this);
-			_window->print("Freeing engine object...\n");
+			fprintf(*_window->getFile(), "%s time: %.1f\n", _name, getTime());
+			fprintf(*_window->getFile(), "%s frames: %i\n", _name, _frames);
+			fprintf(*_window->getFile(), "%s average fps: %.1f\n\n", _name, (float)_frames/getTime());
 		}
 
-		void init(Window *window, void(*_init)(Engine*), void (*logic)(Engine*), void (*render)(Engine*), void (*free)(Engine*));
+		void init(Window *window, void(*_init)(Engine*), void (*logic)(Engine*), void (*render)(Engine*), void (*free)(Engine*), const char* name);
 
 		void use(void);
+
+		// Have to use the underscore so it is a legit name
+		void switch_(void) {
+			_timer.pause();
+			_switch = true;
+		}
 
 		template <class T>
 		void setData(T* t) {
@@ -50,6 +58,13 @@ namespace Mode {
 			return _window;
 		}
 
+		float getTime(void) {
+			return _timer.getTime();
+		}
+		int getFrames(void) {
+			return _frames;
+		}
+
 		double getFps(void) {
 			_timer.update();
 			return (_frames > 10) ? _frames/_timer.getTime() : 10;
@@ -60,6 +75,8 @@ namespace Mode {
 
 	private:
 		Window *_window;
+
+		const char* _name;
 
 		// Function pointers
 		void (*_logic)(Engine*);
@@ -94,6 +111,9 @@ namespace Mode {
 		int _frames;
 		int _lastFrame;
 		float _instFps;
+
+		// Used basically only for the timer
+		bool _switch;
 	};
 };
 

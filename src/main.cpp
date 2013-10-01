@@ -6,7 +6,6 @@
 // Project headers
 #include "window/window.h"
 #include "modes/modes.h"
-#include "utilities/smartptr.h"
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -22,11 +21,13 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 	
-	smartptr<Window*> window(new Window);
+	Window* window(new Window);
 	window->init();
 
 	srand(time(0));
-	gameModes(&window);
+	gameModes(window);
+
+	delete window;
 
 	Window::deinitGLFW();
 	return 0;
