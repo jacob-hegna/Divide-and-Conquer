@@ -19,13 +19,11 @@ void PauseMenu::init(Mode::Engine *engine) {
 }
 
 void PauseMenu::logic(Mode::Engine *engine) {
-	if(engine->getWindow()->getKey(GLFW_KEY_SPACE) ||
-		engine->getWindow()->getKey(GLFW_KEY_ENTER) &&
+	if(engine->getWindow()->getKey(GLFW_KEY_SPACE) &&
 		PauseMenu::select == 2) {
 		engine->getWindow()->close();
 	}
-	if(engine->getWindow()->getKey(GLFW_KEY_SPACE) ||
-		engine->getWindow()->getKey(GLFW_KEY_ENTER) &&
+	if(engine->getWindow()->getKey(GLFW_KEY_SPACE) &&
 		PauseMenu::select == 0) {
 		globalGameMode = GAME_LOOP;
 	}
