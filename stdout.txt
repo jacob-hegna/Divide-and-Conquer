@@ -1,0 +1,26 @@
++------------------------------------+
+| Output file for Divide-and-Conquer |
++------------------------------------+
+Game Loop time: 12.1
+Game Loop frames: 697
+Game Loop average fps: 57.4
+
+Start Menu time: 0.4
+Start Menu frames: 26
+Start Menu average fps: 60.6
+
+Pause Menu time: 14.6
+Pause Menu frames: 145
+Pause Menu average fps: 10.0
+
+Settings Menu time: 0.0
+Settings Menu frames: 0
+Settings Menu average fps: -nan
+
+Game Over time: 0.0
+Game Over frames: 0
+Game Over average fps: -nan
+
+Total time: 14.8
+Total frames: 868
+Average FPS: 58.7

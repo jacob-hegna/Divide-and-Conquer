@@ -1,0 +1,18 @@
+#ifndef _JOYSTICK_H
+#define _JOYSTICK_H
+
+#include <GLFW/glfw3.h>
+
+class Joystick {
+public:
+	Joystick(void);
+	~Joystick(void);
+
+	bool init(void);
+	const float getPos(int);
+	const unsigned char getButton(int);
+private:
+	int _joyNum;
+};
+
+#endif
