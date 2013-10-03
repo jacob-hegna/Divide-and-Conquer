@@ -10,12 +10,14 @@ Joystick::~Joystick(void) {
 
 bool Joystick::init(void) {
 	for(int i = 0; i < 16; ++i) {
-		if(glfwJoystickPresent(i) == GL_TRUE) {
-			_joyNum = i;
-			return true;
-		}
+		if(set(i)) return true;
 	}
 	return false;
+}
+
+bool Joystick::set(int i) {
+	(glfwJoystickPresent(i) == GL_TRUE) ? _joyNum = i : return false;
+	return true;
 }
 
 const float Joystick::getPos(int num) {

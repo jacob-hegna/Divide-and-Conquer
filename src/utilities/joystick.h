@@ -9,6 +9,7 @@ public:
 	~Joystick(void);
 
 	bool init(void);
+	bool set(int);
 	const float getPos(int);
 	const unsigned char getButton(int);
 private:
