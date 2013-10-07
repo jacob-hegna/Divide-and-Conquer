@@ -9,7 +9,10 @@
 
 #include <cstdlib>
 #include <string>
+
+#ifndef _WIN32
 #include <boost/lexical_cast.hpp>
+#endif
 
 namespace GameLoop {
 	extern bool qBuf, pauseBuf;

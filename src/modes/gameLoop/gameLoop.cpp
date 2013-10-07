@@ -18,7 +18,7 @@ void GameLoop::logic(Mode::Engine *engine) {
 	Actors *actors = engine->getData<Actors>();
 	for(int i = 0; i < actors->getHeroAmt(); ++i) {
 		actors->getHero(i)->move(engine);
-		
+
 		if(actors->getHero(i)->getDead()) {
 			std::vector<Hero*> tempVec = *actors->getHeros();
 			actors->getHeros()->clear();
@@ -76,7 +76,9 @@ void GameLoop::logic(Mode::Engine *engine) {
 void GameLoop::render(Mode::Engine *engine) {
 	Actors *actors = engine->getData<Actors>();
 
+#ifndef _WIN32
 	Font::print(boost::lexical_cast<std::string>((int)engine->getInstFps()), 15, 39);
+#endif
 
 	// HUD code goes above this line
 	GameLoop::camera(engine);
@@ -113,7 +115,7 @@ void GameLoop::camera(Mode::Engine *engine) {
 		wh = engine->getWindow()->getH();
 
 	int heroNum = engine->getData<Actors>()->getHeroAmt();
-	float x     = 0, 
+	float x     = 0,
 		  y     = 0,
 		  tempX = 0,
 		  tempY = 0;
