@@ -25,7 +25,7 @@ void gameModes(Window *window) {
 	engine[GAME_OVER]->init(window,     nullptr,         nullptr,             GameOver::render,     nullptr, "Game Over");
 
     Font::init();
-
+    
     do {
 		engine[globalGameMode]->use();
 	} while( !window->shouldClose() );

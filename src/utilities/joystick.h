@@ -12,8 +12,14 @@ public:
 	bool set(int);
 	const float getPos(int);
 	const unsigned char getButton(int);
+
+	bool exists(void) {
+		return _exists;
+	}
+
 private:
 	int _joyNum;
+	bool _exists;
 };
 
 #endif

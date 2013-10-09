@@ -1,5 +1,7 @@
 #include "window.h"
 
+#include <cstring>
+
 using namespace rapidxml;
 
 Window::~Window(void) {
@@ -58,6 +60,14 @@ int Window::init(void)
 		rootAddr = root->first_attribute("path");
 		_outputFile = fopen(rootAddr->value(), "w");
 
+		root = root->next_sibling("input");
+		rootAddr = root->first_attribute("type");
+		if(strcmp(rootAddr->value(), "joystick") == 0) {
+			_inputType = JOYSTICK;
+		} else {
+			_inputType = KEYBOARD;
+		}
+
 	} else {
 		std::ofstream ofile("settings.xml");
 		ofile << "<window title=\"Divide and Conquer\" aa=\"16\">"                                             << std::endl
@@ -65,7 +75,8 @@ int Window::init(void)
 			  << "  <size w=\"800\" h=\"600\" fullscreen=\"0\"/>"                                              << std::endl
 			  << "  <color r=\"1\" g=\"1\" b=\"1\"/>"                                                          << std::endl
 		      << "</window>"                                                                                   << std::endl
-		      << "<output path=\"stdout.txt\"/>"                                                                << std::endl
+		      << "<output path=\"stdout.txt\"/>"                                                               << std::endl
+		      << "<input type=\"keyboard\"/>"                                                                  << std::endl
 		      << "<guns>"                                                                                      << std::endl
 		      << "  <gun name=\"pistol\" w=\"4\" h=\"4\" s=\"650\" da=\"20\" de=\"-1\" a=\"0.1f\"/>"           << std::endl
 		      << "  <gun name=\"gatling\" w=\"3\" h=\"3\" s=\"650\" da=\"1\" de=\"0.001f\" a=\"0.5f\"/>"       << std::endl
@@ -84,11 +95,13 @@ int Window::init(void)
 		_title = "Divide and Conquer";
 		_aa = 16;
 		_fc = false;
+		_inputType = KEYBOARD;
 	}
 
 	_time    = 0;
 	_frames  = 0;
 	_stime   = glfwGetTime(); 
+	_joy.set(0);
  
 	// Output
 	fprintf(_outputFile, "+------------------------------------+\n");

@@ -1,7 +1,8 @@
 #include "joystick.h"
 
 Joystick::Joystick(void) {
-
+	_joyNum = 0;
+	_exists = false;
 }
 
 Joystick::~Joystick(void) {
@@ -16,20 +17,25 @@ bool Joystick::init(void) {
 }
 
 bool Joystick::set(int i) {
-	(glfwJoystickPresent(i) == GL_TRUE) ? _joyNum = i : return false;
-	return true;
+	if(glfwJoystickPresent(i) == GL_TRUE) {
+		_joyNum = i;
+		_exists = true;
+		return true;
+	} else {
+		return false;
+	}
 }
 
 const float Joystick::getPos(int num) {
-	const float *pos;
-	int *amt;
-	pos = glfwGetJoystickAxes(_joyNum, amt);
-	return (num <= *amt) ? pos[num] : -1.f;
+	const float *pos = nullptr;
+	      int   amt  = 0;
+	pos = glfwGetJoystickAxes(_joyNum, &amt);
+	return (num <= amt && amt != 0) ? pos[num] : -1.f;
 }
 
 const unsigned char Joystick::getButton(int num) {
 	const unsigned char* state;
-	int *amt;
-	state = glfwGetJoystickButtons(_joyNum, amt);
-	return (num <= *amt) ? state[num] : 0;
+		  int 	   amt;
+	state = glfwGetJoystickButtons(_joyNum, &amt);
+	return (num <= amt) ? state[num] : 0;
 } 

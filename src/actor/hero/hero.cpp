@@ -38,12 +38,16 @@ void Hero::render(void) {
 
 void Hero::move(Mode::Engine *engine) {
 	Window *window = engine->getWindow();
-	double mx, my;
-	glfwGetCursorPos(window->getWindow(), &mx, &my);
 
-	rotate(nullptr, (float)mx + engine->getData<Actors>()->camX-_x-_w/2, (float)my + engine->getData<Actors>()->camY-_y-_h/2, engine->getData<Actors>()->camX, engine->getData<Actors>()->camY, engine);
+	if(!engine->getWindow()->isJoy()) {
+		double mx, my;
+		glfwGetCursorPos(window->getWindow(), &mx, &my);
+		rotate(nullptr, (float)mx + engine->getData<Actors>()->camX-_x-_w/2, (float)my + engine->getData<Actors>()->camY-_y-_h/2, engine->getData<Actors>()->camX, engine->getData<Actors>()->camY, engine);
+		_keys(engine);	
+	} else {
+		_joy(engine);
+	}
 
-	_keys(engine);
 	shoot(engine);
 	_getDamage(engine);
 }
@@ -53,6 +57,24 @@ void Hero::_keys(Mode::Engine *engine) {
 	if(engine->getWindow()->getKey(GLFW_KEY_S)) _y += _speed/engine->getInstFps();
 	if(engine->getWindow()->getKey(GLFW_KEY_A)) _x -= _speed/engine->getInstFps();
 	if(engine->getWindow()->getKey(GLFW_KEY_D)) _x += _speed/engine->getInstFps();
+
+}
+
+void Hero::_joy(Mode::Engine *engine) {
+	_x          += engine->getWindow()->getJoyPos(0)*_speed/engine->getInstFps();
+	_y          -= engine->getWindow()->getJoyPos(1)*_speed/engine->getInstFps();
+	_theta       = atan(engine->getWindow()->getJoyPos(4)/engine->getWindow()->getJoyPos(3));
+	_coords.x[0] = (float)(getXMid()-(sqrt(pow(_w,2)+pow(_h,2))/2*sin(_theta+M_PI/2)));
+    _coords.y[0] = (float)(getYMid()-(sqrt(pow(_w,2)+pow(_h,2))/2*cos(_theta+M_PI/2)));
+
+    _coords.x[1] = (float)(getXMid()-(sqrt(pow(_w,2)+pow(_h,2))/2*sin(_theta+M_PI)));
+    _coords.y[1] = (float)(getYMid()-(sqrt(pow(_w,2)+pow(_h,2))/2*cos(_theta+M_PI)));
+
+    _coords.x[2] = (float)(getXMid()-(sqrt(pow(_w,2)+pow(_h,2))/2*sin(_theta+M_PI*3/2)));
+    _coords.y[2] = (float)(getYMid()-(sqrt(pow(_w,2)+pow(_h,2))/2*cos(_theta+M_PI*3/2)));
+
+    _coords.x[3]  = (float)(getXMid()-(sqrt(pow(_w,2)+pow(_h,2))/2*sin(_theta)));
+    _coords.y[3]  = (float)(getYMid()-(sqrt(pow(_w,2)+pow(_h,2))/2*cos(_theta)));
 }
 
 void Hero::_getDamage(Mode::Engine *engine) {
@@ -72,7 +94,9 @@ void Hero::_getDamage(Mode::Engine *engine) {
 }
 
 void Hero::shoot(Mode::Engine *engine) {
-	if(glfwGetMouseButton(engine->getWindow()->getWindow(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
+	if((engine->getWindow()->isJoy()) ? 
+		engine->getWindow()->getJoyButton(11) != 0 : 
+		glfwGetMouseButton(engine->getWindow()->getWindow(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
 		if(guns[_gunType].delay != -1) {
 			_bullet->push_back(new Bullet(cos(_theta*-1 - M_PI/4)*_w/2+_x+_w/2, sin(_theta*-1 - M_PI/4)*_h/2+_y+_h/2, (_theta*-1)-M_PI/4, _gunType));
 		} else {

@@ -52,6 +52,7 @@ public:
 
 private:
 	void _keys(Mode::Engine *engine);
+	void _joy(Mode::Engine *engine);
 	void _getDamage(Mode::Engine *engine);
 
 	// Variables for combat

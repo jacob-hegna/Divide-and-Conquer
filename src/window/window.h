@@ -12,6 +12,8 @@
 #include <rapidxml/rapidxml.hpp>
 #include <rapidxml/rapidxml_utils.hpp>
 
+#include "../utilities/joystick.h"
+
 class Window
 {
 public:
@@ -55,6 +57,16 @@ public:
 		return (glfwGetKey(_window, key) == GLFW_PRESS);
 	}
 
+	float getJoyPos(int i) {
+		return _joy.getPos(i);
+	}
+	float getJoyButton(int i) {
+		return _joy.getButton(i);
+	}
+	bool isJoy(void) {
+		return _inputType==JOYSTICK;
+	}
+
 	GLFWwindow* getWindow(void) {
 		return _window;
 	}
@@ -89,6 +101,11 @@ public:
 
 private:
 	GLFWwindow *_window;
+	Joystick    _joy;
+	enum {
+		KEYBOARD,
+		JOYSTICK
+	} _inputType;
 
 	std::string _title;
 	int _x, _y;
