@@ -61,20 +61,29 @@ void Hero::_keys(Mode::Engine *engine) {
 }
 
 void Hero::_joy(Mode::Engine *engine) {
-	_x          += engine->getWindow()->getJoyPos(0)*_speed/engine->getInstFps();
-	_y          -= engine->getWindow()->getJoyPos(1)*_speed/engine->getInstFps();
-	_theta       = atan(engine->getWindow()->getJoyPos(4)/engine->getWindow()->getJoyPos(3));
-	_coords.x[0] = (float)(getXMid()-(sqrt(pow(_w,2)+pow(_h,2))/2*sin(_theta+M_PI/2)));
-    _coords.y[0] = (float)(getYMid()-(sqrt(pow(_w,2)+pow(_h,2))/2*cos(_theta+M_PI/2)));
+	_x             += engine->getWindow()->getJoyPos(0)*_speed/engine->getInstFps();
+	_y             -= engine->getWindow()->getJoyPos(1)*_speed/engine->getInstFps();
 
-    _coords.x[1] = (float)(getXMid()-(sqrt(pow(_w,2)+pow(_h,2))/2*sin(_theta+M_PI)));
-    _coords.y[1] = (float)(getYMid()-(sqrt(pow(_w,2)+pow(_h,2))/2*cos(_theta+M_PI)));
+	float x         = sqrt(pow(engine->getWindow()->getJoyPos(2), 2) + pow(engine->getWindow()->getJoyPos(3), 2));
+	if(x != 0) {
+		if(engine->getWindow()->getJoyPos(2) < 0) {
+			_theta = acos(engine->getWindow()->getJoyPos(3)/x) + M_PI/4;
+		} else {
+			_theta = -1 * acos(engine->getWindow()->getJoyPos(3)/x) + M_PI/4;
+		}
+	}
+	
+	_coords.x[0]    = (float)(getXMid()-(sqrt(pow(_w,2)+pow(_h,2))/2*sin(_theta+M_PI/2)));
+    _coords.y[0]    = (float)(getYMid()-(sqrt(pow(_w,2)+pow(_h,2))/2*cos(_theta+M_PI/2)));
 
-    _coords.x[2] = (float)(getXMid()-(sqrt(pow(_w,2)+pow(_h,2))/2*sin(_theta+M_PI*3/2)));
-    _coords.y[2] = (float)(getYMid()-(sqrt(pow(_w,2)+pow(_h,2))/2*cos(_theta+M_PI*3/2)));
+    _coords.x[1]    = (float)(getXMid()-(sqrt(pow(_w,2)+pow(_h,2))/2*sin(_theta+M_PI)));
+    _coords.y[1]    = (float)(getYMid()-(sqrt(pow(_w,2)+pow(_h,2))/2*cos(_theta+M_PI)));
 
-    _coords.x[3]  = (float)(getXMid()-(sqrt(pow(_w,2)+pow(_h,2))/2*sin(_theta)));
-    _coords.y[3]  = (float)(getYMid()-(sqrt(pow(_w,2)+pow(_h,2))/2*cos(_theta)));
+    _coords.x[2]    = (float)(getXMid()-(sqrt(pow(_w,2)+pow(_h,2))/2*sin(_theta+M_PI*3/2)));
+    _coords.y[2]    = (float)(getYMid()-(sqrt(pow(_w,2)+pow(_h,2))/2*cos(_theta+M_PI*3/2)));
+
+    _coords.x[3]    = (float)(getXMid()-(sqrt(pow(_w,2)+pow(_h,2))/2*sin(_theta)));
+    _coords.y[3]    = (float)(getYMid()-(sqrt(pow(_w,2)+pow(_h,2))/2*cos(_theta)));
 }
 
 void Hero::_getDamage(Mode::Engine *engine) {

@@ -21,18 +21,16 @@ void PauseMenu::init(Mode::Engine *engine) {
 void PauseMenu::logic(Mode::Engine *engine) {
 	if(engine->getWindow()->isJoy()) {
 		// Need to replace keyboard code with joystick code
-		if(engine->getWindow()->getKey(GLFW_KEY_SPACE) ||
-			engine->getWindow()->getKey(GLFW_KEY_ENTER) &&
+		if(engine->getWindow()->getJoyButton(14) &&
 			PauseMenu::select == 2) {
 			engine->getWindow()->close();
 		}
-		if(engine->getWindow()->getKey(GLFW_KEY_SPACE) ||
-			engine->getWindow()->getKey(GLFW_KEY_ENTER) &&
+		if(engine->getWindow()->getJoyButton(14)  &&
 			PauseMenu::select == 0) {
 			globalGameMode = GAME_LOOP;
 		}
 
-		if(engine->getWindow()->getKey(GLFW_KEY_W)) {
+		if(engine->getWindow()->getJoyButton(4)) {
 			if(!PauseMenu::wBuf) {
 				if(PauseMenu::select < 2) ++PauseMenu::select;
 				PauseMenu::wBuf = true;
@@ -40,7 +38,7 @@ void PauseMenu::logic(Mode::Engine *engine) {
 		} else {
 			PauseMenu::wBuf = false;
 		}
-		if(engine->getWindow()->getKey(GLFW_KEY_S)) {
+		if(engine->getWindow()->getJoyButton(6)) {
 			if(!PauseMenu::sBuf) {
 				if(PauseMenu::select > 0) --PauseMenu::select;
 				PauseMenu::sBuf = true;
@@ -49,7 +47,7 @@ void PauseMenu::logic(Mode::Engine *engine) {
 			PauseMenu::sBuf = false;
 		}
 
-		if(engine->getWindow()->getKey(GLFW_KEY_ESCAPE)) {
+		if(engine->getWindow()->getJoyButton(3)) {
 			if(!PauseMenu::pauseBuf) {
 				globalGameMode = GAME_LOOP;
 				PauseMenu::pauseBuf = true;
