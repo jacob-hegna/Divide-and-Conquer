@@ -38,33 +38,67 @@ void GameLoop::logic(Mode::Engine *engine) {
 		}
 	}
 
-	if(engine->getWindow()->getKey(GLFW_KEY_Q)) {
-		if(!GameLoop::qBuf && actors->getHeroAmt() < 4) {
-			if(actors->getHeroAmt() != 2) actors->pushHero(actors->getHero(actors->getHeroAmt()-1)->getX(), actors->getHero(actors->getHeroAmt()-1)->getY() + 150, 75, 75, 325.f, 100);
-			else                          actors->pushHero(actors->getHero(actors->getHeroAmt()-1)->getX() + 150, actors->getHero(actors->getHeroAmt()-1)->getY() - 150, 75, 75, 325.f, 100);
-			--actors->heroPoints;
+	if(engine->getWindow()->isJoy()) {
+		if(engine->getWindow()->getJoyButton(12) != 0) {
+			if(!GameLoop::qBuf && actors->getHeroAmt() < 4) {
+				if(actors->getHeroAmt() != 2) actors->pushHero(actors->getHero(actors->getHeroAmt()-1)->getX(), actors->getHero(actors->getHeroAmt()-1)->getY() + 150, 75, 75, 325.f, 100);
+				else                          actors->pushHero(actors->getHero(actors->getHeroAmt()-1)->getX() + 150, actors->getHero(actors->getHeroAmt()-1)->getY() - 150, 75, 75, 325.f, 100);
+				--actors->heroPoints;
+			}
+			GameLoop::qBuf = true;
+		} else {
+			GameLoop::qBuf = false;
 		}
-		GameLoop::qBuf = true;
-	} else {
-		GameLoop::qBuf = false;
-	}
 
-	for(int i = GLFW_KEY_1; i < GLFW_KEY_9; ++i) {
-		if(engine->getWindow()->getKey(i)) {
-			for(int j = 0; j < actors->getHeroAmt(); ++j) {
-				actors->getHero(j)->setType(i-GLFW_KEY_1);
+		if(engine->getWindow()->getJoyButton(7) != 0) {
+			for(int i = 0; i < actors->getHeroAmt(); ++i) {
+				actors->getHero(i)->decType();
 			}
 		}
-	}
+		if(engine->getWindow()->getJoyButton(5) != 0) {
+			for(int i = 0; i < actors->getHeroAmt(); ++i) {
+				actors->getHero(i)->incType();
+			}
+		}
 
-	if(engine->getWindow()->getKey(GLFW_KEY_ESCAPE)) {
-		if(!GameLoop::pauseBuf) {
-			globalGameMode = PAUSE_MENU;
-			GameLoop::pauseBuf = true;
-			engine->switch_();
+		if(engine->getWindow()->getJoyButton(3) != 0) {
+			if(!GameLoop::pauseBuf) {
+				globalGameMode = PAUSE_MENU;
+				GameLoop::pauseBuf = true;
+				engine->switch_();
+			}
+		} else {
+			GameLoop::pauseBuf = false;
 		}
 	} else {
-		GameLoop::pauseBuf = false;
+		if(engine->getWindow()->getKey(GLFW_KEY_Q)) {
+			if(!GameLoop::qBuf && actors->getHeroAmt() < 4) {
+				if(actors->getHeroAmt() != 2) actors->pushHero(actors->getHero(actors->getHeroAmt()-1)->getX(), actors->getHero(actors->getHeroAmt()-1)->getY() + 150, 75, 75, 325.f, 100);
+				else                          actors->pushHero(actors->getHero(actors->getHeroAmt()-1)->getX() + 150, actors->getHero(actors->getHeroAmt()-1)->getY() - 150, 75, 75, 325.f, 100);
+				--actors->heroPoints;
+			}
+			GameLoop::qBuf = true;
+		} else {
+			GameLoop::qBuf = false;
+		}
+
+		for(int i = GLFW_KEY_1; i < GLFW_KEY_9; ++i) {
+			if(engine->getWindow()->getKey(i)) {
+				for(int j = 0; j < actors->getHeroAmt(); ++j) {
+					actors->getHero(j)->setType(i-GLFW_KEY_1);
+				}
+			}
+		}
+
+		if(engine->getWindow()->getKey(GLFW_KEY_ESCAPE)) {
+			if(!GameLoop::pauseBuf) {
+				globalGameMode = PAUSE_MENU;
+				GameLoop::pauseBuf = true;
+				engine->switch_();
+			}
+		} else {
+			GameLoop::pauseBuf = false;
+		}
 	}
 
 	if(actors->getHeros()->empty()) {

@@ -47,6 +47,16 @@ public:
 			return false;
 		}
 	}
+	void decType(void) {
+		if(_gunType > 0) {
+			--_gunType;
+		}
+	}
+	void incType(void) {
+		if(_gunType < guns.size()) {
+			++_gunType;
+		}
+	}
 
 	void free(void);
 

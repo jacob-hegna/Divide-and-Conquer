@@ -19,41 +19,81 @@ void PauseMenu::init(Mode::Engine *engine) {
 }
 
 void PauseMenu::logic(Mode::Engine *engine) {
-	if(engine->getWindow()->getKey(GLFW_KEY_SPACE) ||
-		engine->getWindow()->getKey(GLFW_KEY_ENTER) &&
-		PauseMenu::select == 2) {
-		engine->getWindow()->close();
-	}
-	if(engine->getWindow()->getKey(GLFW_KEY_SPACE) ||
-		engine->getWindow()->getKey(GLFW_KEY_ENTER) &&
-		PauseMenu::select == 0) {
-		globalGameMode = GAME_LOOP;
-	}
-
-	if(engine->getWindow()->getKey(GLFW_KEY_W)) {
-		if(!PauseMenu::wBuf) {
-			if(PauseMenu::select < 2) ++PauseMenu::select;
-			PauseMenu::wBuf = true;
+	if(engine->getWindow()->isJoy()) {
+		// Need to replace keyboard code with joystick code
+		if(engine->getWindow()->getKey(GLFW_KEY_SPACE) ||
+			engine->getWindow()->getKey(GLFW_KEY_ENTER) &&
+			PauseMenu::select == 2) {
+			engine->getWindow()->close();
 		}
-	} else {
-		PauseMenu::wBuf = false;
-	}
-	if(engine->getWindow()->getKey(GLFW_KEY_S)) {
-		if(!PauseMenu::sBuf) {
-			if(PauseMenu::select > 0) --PauseMenu::select;
-			PauseMenu::sBuf = true;
-		}
-	} else {
-		PauseMenu::sBuf = false;
-	}
-
-	if(engine->getWindow()->getKey(GLFW_KEY_ESCAPE)) {
-		if(!PauseMenu::pauseBuf) {
+		if(engine->getWindow()->getKey(GLFW_KEY_SPACE) ||
+			engine->getWindow()->getKey(GLFW_KEY_ENTER) &&
+			PauseMenu::select == 0) {
 			globalGameMode = GAME_LOOP;
-			PauseMenu::pauseBuf = true;
+		}
+
+		if(engine->getWindow()->getKey(GLFW_KEY_W)) {
+			if(!PauseMenu::wBuf) {
+				if(PauseMenu::select < 2) ++PauseMenu::select;
+				PauseMenu::wBuf = true;
+			}
+		} else {
+			PauseMenu::wBuf = false;
+		}
+		if(engine->getWindow()->getKey(GLFW_KEY_S)) {
+			if(!PauseMenu::sBuf) {
+				if(PauseMenu::select > 0) --PauseMenu::select;
+				PauseMenu::sBuf = true;
+			}
+		} else {
+			PauseMenu::sBuf = false;
+		}
+
+		if(engine->getWindow()->getKey(GLFW_KEY_ESCAPE)) {
+			if(!PauseMenu::pauseBuf) {
+				globalGameMode = GAME_LOOP;
+				PauseMenu::pauseBuf = true;
+			}
+		} else {
+			PauseMenu::pauseBuf = false;
 		}
 	} else {
-		PauseMenu::pauseBuf = false;
+		if(engine->getWindow()->getKey(GLFW_KEY_SPACE) ||
+			engine->getWindow()->getKey(GLFW_KEY_ENTER) &&
+			PauseMenu::select == 2) {
+			engine->getWindow()->close();
+		}
+		if(engine->getWindow()->getKey(GLFW_KEY_SPACE) ||
+			engine->getWindow()->getKey(GLFW_KEY_ENTER) &&
+			PauseMenu::select == 0) {
+			globalGameMode = GAME_LOOP;
+		}
+
+		if(engine->getWindow()->getKey(GLFW_KEY_W)) {
+			if(!PauseMenu::wBuf) {
+				if(PauseMenu::select < 2) ++PauseMenu::select;
+				PauseMenu::wBuf = true;
+			}
+		} else {
+			PauseMenu::wBuf = false;
+		}
+		if(engine->getWindow()->getKey(GLFW_KEY_S)) {
+			if(!PauseMenu::sBuf) {
+				if(PauseMenu::select > 0) --PauseMenu::select;
+				PauseMenu::sBuf = true;
+			}
+		} else {
+			PauseMenu::sBuf = false;
+		}
+
+		if(engine->getWindow()->getKey(GLFW_KEY_ESCAPE)) {
+			if(!PauseMenu::pauseBuf) {
+				globalGameMode = GAME_LOOP;
+				PauseMenu::pauseBuf = true;
+			}
+		} else {
+			PauseMenu::pauseBuf = false;
+		}
 	}
 }
 
