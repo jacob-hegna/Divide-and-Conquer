@@ -10,10 +10,12 @@ void StartMenu::init(Mode::Engine *engine) {
 void StartMenu::logic(Mode::Engine *engine) {
 	if(engine->getWindow()->isJoy()) {
 		if(engine->getWindow()->getJoyButton(14) != 0) {
+			engine->switch_();
 			globalGameMode = GAME_LOOP;
 		}
 	} else {
 		if(engine->getWindow()->getKey(GLFW_KEY_SPACE)) {
+			engine->switch_();
 			globalGameMode = GAME_LOOP;
 		}
 	}

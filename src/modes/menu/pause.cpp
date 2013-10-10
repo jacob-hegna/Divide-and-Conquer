@@ -15,66 +15,40 @@ void PauseMenu::init(Mode::Engine *engine) {
 }
 
 void PauseMenu::logic(Mode::Engine *engine) {
-	if(engine->getWindow()->isJoy()) {
-		if(engine->getWindow()->getJoyButton(14) &&
-			PauseMenu::select == 2) {
-			engine->getWindow()->close();
+	if((engine->getWindow()->isJoy()) ? engine->getWindow()->getJoyButton(14) : 
+		(engine->getWindow()->getKey(GLFW_KEY_SPACE) || engine->getWindow()->getKey(GLFW_KEY_ENTER))) {
+		switch(PauseMenu::select) {
+			case 0:
+				engine->switch_();
+				globalGameMode = GAME_LOOP;
+				break;
+			case 1:
+				engine->switch_();
+				globalGameMode = SETTINGS_MENU;
+				break;
+			case 2:
+				engine->getWindow()->close();
+				break;
 		}
-		if(engine->getWindow()->getJoyButton(14)  &&
-			PauseMenu::select == 1) {
-			globalGameMode = SETTINGS_MENU;
-		}
-		if(engine->getWindow()->getJoyButton(14)  &&
-			PauseMenu::select == 0) {
-			globalGameMode = GAME_LOOP;
-		}
-
-		bufFunc(engine->getWindow()->getJoyButton(4),
-				&PauseMenu::wBuf,
-				[] (int *select, void* v) {if(*select < 2) ++*select;},
-				&PauseMenu::select, nullptr);
-		
-		bufFunc(engine->getWindow()->getJoyButton(6),
-				&PauseMenu::sBuf,
-				[] (int *select, void *v) {if(*select > 0) --*select;},
-				&PauseMenu::select, nullptr);
-
-		bufFunc(engine->getWindow()->getJoyButton(3),
-				&PauseMenu::pauseBuf,
-				[] (GameModeType *mode, void *v) {*mode = GAME_LOOP;},
-				&globalGameMode, nullptr);
-	} else {
-		if((engine->getWindow()->getKey(GLFW_KEY_SPACE) ||
-			engine->getWindow()->getKey(GLFW_KEY_ENTER)) &&
-			PauseMenu::select == 2) {
-			engine->getWindow()->close();
-		}
-		if((engine->getWindow()->getKey(GLFW_KEY_SPACE) ||
-			engine->getWindow()->getKey(GLFW_KEY_ENTER)) &&
-			PauseMenu::select == 1) {
-			globalGameMode = SETTINGS_MENU;
-		}
-		if((engine->getWindow()->getKey(GLFW_KEY_SPACE) ||
-			engine->getWindow()->getKey(GLFW_KEY_ENTER)) &&
-			PauseMenu::select == 0) {
-			globalGameMode = GAME_LOOP;
-		}
-
-		bufFunc(engine->getWindow()->getKey(GLFW_KEY_W),
-				&PauseMenu::wBuf,
-				[] (int *select, void* v) {if(*select < 2) ++*select;},
-				&PauseMenu::select, nullptr);
-		
-		bufFunc(engine->getWindow()->getKey(GLFW_KEY_S),
-				&PauseMenu::sBuf,
-				[] (int *select, void *v) {if(*select > 0) --*select;},
-				&PauseMenu::select, nullptr);
-
-		bufFunc(engine->getWindow()->getKey(GLFW_KEY_ESCAPE),
-				&PauseMenu::pauseBuf,
-				[] (GameModeType *mode, void *v) {*mode = GAME_LOOP;},
-				&globalGameMode, nullptr);
 	}
+
+	bufFunc((engine->getWindow()->isJoy()) ? engine->getWindow()->getJoyButton(4) : 
+			engine->getWindow()->getKey(GLFW_KEY_W),
+			&PauseMenu::wBuf,
+			[] (int *select, void* v) {if(*select < 2) ++*select;},
+			&PauseMenu::select, nullptr);
+	
+	bufFunc((engine->getWindow()->isJoy()) ? engine->getWindow()->getJoyButton(6) :
+			engine->getWindow()->getKey(GLFW_KEY_S),
+			&PauseMenu::sBuf,
+			[] (int *select, void *v) {if(*select > 0) --*select;},
+			&PauseMenu::select, nullptr);
+
+	bufFunc((engine->getWindow()->isJoy()) ? engine->getWindow()->getJoyButton(3) :
+			engine->getWindow()->getKey(GLFW_KEY_ESCAPE),
+			&PauseMenu::pauseBuf,
+			[] (GameModeType *mode, Mode::Engine *engine) {*mode = GAME_LOOP;engine->switch_();},
+			&globalGameMode, engine);
 }
 
 void PauseMenu::render(Mode::Engine *engine) {

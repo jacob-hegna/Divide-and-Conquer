@@ -44,11 +44,6 @@ public:
 
 	void clear(void);
 
-	// If you need to do variable printing
-	FILE** getFile(void) {
-		return &_outputFile;
-	}
-
 	void setKeyCallback(void (*keyCallBack)(GLFWwindow *window, int key, int scan, int action, int mods)) {
 		glfwSetKeyCallback(_window, keyCallBack);
 	}
@@ -122,8 +117,6 @@ private:
 	int _oldW, _oldH;
 	bool _fc;
 	int _aa;
-
-	FILE* _outputFile;
 
 	int  _frames;
 	float _time,

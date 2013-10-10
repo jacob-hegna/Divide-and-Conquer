@@ -11,11 +11,6 @@ Window::~Window(void) {
 void Window::free(void) {
 	_time = glfwGetTime() - _stime;
 	glfwDestroyWindow(_window);
-
-	fprintf(_outputFile, "Total time: %.1f\n", _time);
-	fprintf(_outputFile, "Total frames: %i\n", _frames);
-	fprintf(_outputFile, "Average FPS: %.1f\n", (float)_frames/_time);
-	fclose(_outputFile);
 }
 
 int Window::init(void)
@@ -56,10 +51,6 @@ int Window::init(void)
 		attr = attr->next_attribute("b");
 		_clearColor.b = atof(attr->value());
 
-		root = root->next_sibling("output");
-		rootAddr = root->first_attribute("path");
-		_outputFile = fopen(rootAddr->value(), "w");
-
 		root = root->next_sibling("input");
 		rootAddr = root->first_attribute("type");
 		if(strcmp(rootAddr->value(), "joystick") == 0) {
@@ -74,8 +65,7 @@ int Window::init(void)
 			  << "  <pos  x=\"15\" y=\"15\"/>"                                                                 << std::endl
 			  << "  <size w=\"800\" h=\"600\" fullscreen=\"0\"/>"                                              << std::endl
 			  << "  <color r=\"1\" g=\"1\" b=\"1\"/>"                                                          << std::endl
-		      << "</window>"                                                                                   << std::endl
-		      << "<output path=\"stdout.txt\"/>"                                                               << std::endl
+		      << "</window>"
 		      << "<input type=\"keyboard\"/>"                                                                  << std::endl
 		      << "<guns>"                                                                                      << std::endl
 		      << "  <gun name=\"pistol\" w=\"4\" h=\"4\" s=\"650\" da=\"20\" de=\"-1\" a=\"0.1f\"/>"           << std::endl
@@ -84,7 +74,6 @@ int Window::init(void)
 		      << "  <gun name=\"RPG\" w=\"25\" h=\"25\" s=\"550\" da=\"150\" de=\"-1\" a=\"0.15f\"/>"          << std::endl
 		      << "</guns>"                                                                  << std::endl;
 		ofile.close();
-		_outputFile = fopen("stdout.txt", "w");
 		_clearColor.r = 1.f;
 		_clearColor.g = 1.f;
 		_clearColor.b = 1.f;
@@ -104,11 +93,6 @@ int Window::init(void)
 	_joy.set(0);
 	_oldW = _w;
 	_oldH = _h;
- 
-	// Output
-	fprintf(_outputFile, "+------------------------------------+\n");
-	fprintf(_outputFile, "| Output file for Divide-and-Conquer |\n");
-	fprintf(_outputFile, "+------------------------------------+\n");
 
 	glfwWindowHint(GLFW_SAMPLES, _aa);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);

@@ -27,9 +27,6 @@ namespace Mode {
 		}
 		void free(void) {
 			if(_free != nullptr) _free(this);
-			fprintf(*_window->getFile(), "%s time: %.1f\n", _name, getTime());
-			fprintf(*_window->getFile(), "%s frames: %i\n", _name, _frames);
-			fprintf(*_window->getFile(), "%s average fps: %.1f\n\n", _name, (float)_frames/getTime());
 		}
 
 		void init(Window *window, void(*_init)(Engine*), void (*logic)(Engine*), void (*render)(Engine*), void (*free)(Engine*), const char* name);

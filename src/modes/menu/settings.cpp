@@ -64,6 +64,7 @@ void SettingsMenu::logic(Mode::Engine *engine) {
 
 	if((engine->getWindow()->isJoy()) ? engine->getWindow()->getJoyButton(13) != 0 :
 		engine->getWindow()->getKey(GLFW_KEY_Q)) {
+		engine->switch_();
 		globalGameMode = PAUSE_MENU;
 	}
 }
@@ -74,6 +75,7 @@ void SettingsMenu::render(Mode::Engine *engine) {
 		Font::print((select==i) ? SettingsMenu::options[i] + "*" : SettingsMenu::options[i],
 					15, 
 					engine->getWindow()->getH() - (15+50*i));
+					
 		if(SettingsMenu::options[i] == "Window width") {
 			Font::print(SSTR(engine->getWindow()->getW()),
 				        300,
