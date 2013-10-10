@@ -1,8 +1,4 @@
 #include "pause.h"
-#include "../modes.h"
-
-#include "../../media/font.h"
-#include "../../utilities/array_size.h"
 
 bool PauseMenu::pauseBuf = true;
 std::string PauseMenu::options[3] = {
@@ -20,78 +16,64 @@ void PauseMenu::init(Mode::Engine *engine) {
 
 void PauseMenu::logic(Mode::Engine *engine) {
 	if(engine->getWindow()->isJoy()) {
-		// Need to replace keyboard code with joystick code
 		if(engine->getWindow()->getJoyButton(14) &&
 			PauseMenu::select == 2) {
 			engine->getWindow()->close();
+		}
+		if(engine->getWindow()->getJoyButton(14)  &&
+			PauseMenu::select == 1) {
+			globalGameMode = SETTINGS_MENU;
 		}
 		if(engine->getWindow()->getJoyButton(14)  &&
 			PauseMenu::select == 0) {
 			globalGameMode = GAME_LOOP;
 		}
 
-		if(engine->getWindow()->getJoyButton(4)) {
-			if(!PauseMenu::wBuf) {
-				if(PauseMenu::select < 2) ++PauseMenu::select;
-				PauseMenu::wBuf = true;
-			}
-		} else {
-			PauseMenu::wBuf = false;
-		}
-		if(engine->getWindow()->getJoyButton(6)) {
-			if(!PauseMenu::sBuf) {
-				if(PauseMenu::select > 0) --PauseMenu::select;
-				PauseMenu::sBuf = true;
-			}
-		} else {
-			PauseMenu::sBuf = false;
-		}
+		bufFunc(engine->getWindow()->getJoyButton(4),
+				&PauseMenu::wBuf,
+				[] (int *select, void* v) {if(*select < 2) ++*select;},
+				&PauseMenu::select, nullptr);
+		
+		bufFunc(engine->getWindow()->getJoyButton(6),
+				&PauseMenu::sBuf,
+				[] (int *select, void *v) {if(*select > 0) --*select;},
+				&PauseMenu::select, nullptr);
 
-		if(engine->getWindow()->getJoyButton(3)) {
-			if(!PauseMenu::pauseBuf) {
-				globalGameMode = GAME_LOOP;
-				PauseMenu::pauseBuf = true;
-			}
-		} else {
-			PauseMenu::pauseBuf = false;
-		}
+		bufFunc(engine->getWindow()->getJoyButton(3),
+				&PauseMenu::pauseBuf,
+				[] (GameModeType *mode, void *v) {*mode = GAME_LOOP;},
+				&globalGameMode, nullptr);
 	} else {
-		if(engine->getWindow()->getKey(GLFW_KEY_SPACE) ||
-			engine->getWindow()->getKey(GLFW_KEY_ENTER) &&
+		if((engine->getWindow()->getKey(GLFW_KEY_SPACE) ||
+			engine->getWindow()->getKey(GLFW_KEY_ENTER)) &&
 			PauseMenu::select == 2) {
 			engine->getWindow()->close();
 		}
-		if(engine->getWindow()->getKey(GLFW_KEY_SPACE) ||
-			engine->getWindow()->getKey(GLFW_KEY_ENTER) &&
+		if((engine->getWindow()->getKey(GLFW_KEY_SPACE) ||
+			engine->getWindow()->getKey(GLFW_KEY_ENTER)) &&
+			PauseMenu::select == 1) {
+			globalGameMode = SETTINGS_MENU;
+		}
+		if((engine->getWindow()->getKey(GLFW_KEY_SPACE) ||
+			engine->getWindow()->getKey(GLFW_KEY_ENTER)) &&
 			PauseMenu::select == 0) {
 			globalGameMode = GAME_LOOP;
 		}
 
-		if(engine->getWindow()->getKey(GLFW_KEY_W)) {
-			if(!PauseMenu::wBuf) {
-				if(PauseMenu::select < 2) ++PauseMenu::select;
-				PauseMenu::wBuf = true;
-			}
-		} else {
-			PauseMenu::wBuf = false;
-		}
-		if(engine->getWindow()->getKey(GLFW_KEY_S)) {
-			if(!PauseMenu::sBuf) {
-				if(PauseMenu::select > 0) --PauseMenu::select;
-				PauseMenu::sBuf = true;
-			}
-		} else {
-			PauseMenu::sBuf = false;
-		}
+		bufFunc(engine->getWindow()->getKey(GLFW_KEY_W),
+				&PauseMenu::wBuf,
+				[] (int *select, void* v) {if(*select < 2) ++*select;},
+				&PauseMenu::select, nullptr);
+		
+		bufFunc(engine->getWindow()->getKey(GLFW_KEY_S),
+				&PauseMenu::sBuf,
+				[] (int *select, void *v) {if(*select > 0) --*select;},
+				&PauseMenu::select, nullptr);
 
-		if(engine->getWindow()->getKey(GLFW_KEY_ESCAPE)) {
-			if(!PauseMenu::pauseBuf) {
-				globalGameMode = GAME_LOOP;
-				PauseMenu::pauseBuf = true;
-			}
-		} else {
-			PauseMenu::pauseBuf = false;
-		}
+		bufFunc(engine->getWindow()->getKey(GLFW_KEY_ESCAPE),
+				&PauseMenu::pauseBuf,
+				[] (GameModeType *mode, void *v) {*mode = GAME_LOOP;},
+				&globalGameMode, nullptr);
 	}
 }
 

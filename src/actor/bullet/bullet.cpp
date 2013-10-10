@@ -1,8 +1,5 @@
 #include "bullet.h"
 
-#include <cmath>
-#include "../../utilities/util.h"
-
 std::vector<Gun> guns;
 
 void Bullet::init(float px, float py, float ptheta, int type)

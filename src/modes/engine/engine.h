@@ -6,7 +6,7 @@
 
 #include "../../window/window.h"
 #include "../../media/font.h"
-#include "../../utilities/timer.h"
+#include "../../util/util.h"
 
 namespace Mode {
 	// This class controls any main section of game function

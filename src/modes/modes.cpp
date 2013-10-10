@@ -1,14 +1,5 @@
 #include "modes.h"
 
-#include "engine/engine.h"
-#include "gameLoop/gameLoop.h"
-#include "menu/start.h"
-#include "menu/pause.h"
-#include "menu/settings.h"
-#include "menu/gameOver.h"
-
-#include "../media/font.h"
-
 GameModeType globalGameMode = START_MENU;
 
 void gameModes(Window *window) {

@@ -3,11 +3,13 @@
 
 #include <vector>
 #include <string>
+#include <cmath>
 #include <rapidxml/rapidxml.hpp>
 #include <rapidxml/rapidxml_utils.hpp>
 
 #include "../actor.h"
 #include "../../modes/engine/engine.h"
+#include "../../util/util.h"
 
 struct Gun {
 	std::string name;

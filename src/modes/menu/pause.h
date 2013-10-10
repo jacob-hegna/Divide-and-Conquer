@@ -3,6 +3,9 @@
 
 #include <string>
 
+#include "../modes.h"
+#include "../../media/font.h"
+#include "../../util/util.h"
 #include "../engine/engine.h"
 
 namespace PauseMenu {

@@ -102,6 +102,8 @@ int Window::init(void)
 	_frames  = 0;
 	_stime   = glfwGetTime(); 
 	_joy.set(0);
+	_oldW = _w;
+	_oldH = _h;
  
 	// Output
 	fprintf(_outputFile, "+------------------------------------+\n");
@@ -143,4 +145,10 @@ int Window::init(void)
 void Window::clear(void) {
 	glLoadIdentity();
 	glClear(GL_COLOR_BUFFER_BIT);
+
+	if(_oldW != _w || _oldH != _h) {
+		_oldW = _w;
+		_oldH = _h;
+		glfwSetWindowSize(_window, _w, _h);
+	}
 }

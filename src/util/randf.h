@@ -1,5 +1,5 @@
-#ifndef _UTIL_H
-#define _UTIL_H
+#ifndef _RANDF_H_
+#define _RANDF_H_
 
 #include <cstdlib>
 

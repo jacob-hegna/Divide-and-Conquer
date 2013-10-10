@@ -8,7 +8,8 @@ void GameOver::render(Mode::Engine *engine) {
 		glVertex2d(engine->getWindow()->getW(), engine->getWindow()->getH());
 		glVertex2d(0, engine->getWindow()->getH());
 	glEnd();
-	if(engine->getWindow()->getKey(GLFW_KEY_SPACE) || engine->getWindow()->getKey(GLFW_KEY_ESCAPE)) {
+	if((engine->getWindow()->isJoy()) ? engine->getWindow()->getJoyButton(13) != 0 :
+		engine->getWindow()->getKey(GLFW_KEY_SPACE) || engine->getWindow()->getKey(GLFW_KEY_ESCAPE)) {
 		engine->getWindow()->close();
 	}
 }

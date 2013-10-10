@@ -2,8 +2,13 @@
 
 #include "../../media/font.h"
 
-bool GameLoop::qBuf = false;
+bool GameLoop::qBuf     = false;
 bool GameLoop::pauseBuf = false;
+
+bool GameLoop::rightBuf = false;
+bool GameLoop::leftBuf  = false;
+bool GameLoop::upBuf    = false;
+bool GameLoop::downBuf  = false;
 
 void GameLoop::init(Mode::Engine *engine) {
 	Actors *actors = new Actors;
@@ -37,18 +42,17 @@ void GameLoop::logic(Mode::Engine *engine) {
 			actors->getEnemy(i)->init(randF(-400, 400), randF(-300, 300), 75, 75, randF(130.f, 292.5f), 100, 10);
 		}
 	}
-
 	if(engine->getWindow()->isJoy()) {
-		if(engine->getWindow()->getJoyButton(12) != 0) {
-			if(!GameLoop::qBuf && actors->getHeroAmt() < 4) {
-				if(actors->getHeroAmt() != 2) actors->pushHero(actors->getHero(actors->getHeroAmt()-1)->getX(), actors->getHero(actors->getHeroAmt()-1)->getY() + 150, 75, 75, 325.f, 100);
-				else                          actors->pushHero(actors->getHero(actors->getHeroAmt()-1)->getX() + 150, actors->getHero(actors->getHeroAmt()-1)->getY() - 150, 75, 75, 325.f, 100);
-				--actors->heroPoints;
-			}
-			GameLoop::qBuf = true;
-		} else {
-			GameLoop::qBuf = false;
-		}
+		bufFunc(engine->getWindow()->getJoyButton(12) != 0,
+				&GameLoop::qBuf,
+				[] (Actors *actors, void *v) {
+					if(actors->getHeroAmt() < 4) {
+						if(actors->getHeroAmt() != 2) actors->pushHero(actors->getHero(actors->getHeroAmt()-1)->getX(), actors->getHero(actors->getHeroAmt()-1)->getY() + 150, 75, 75, 325.f, 100);
+						else                          actors->pushHero(actors->getHero(actors->getHeroAmt()-1)->getX() + 150, actors->getHero(actors->getHeroAmt()-1)->getY() - 150, 75, 75, 325.f, 100);
+						--actors->heroPoints;
+					}
+				},
+				actors, nullptr);
 
 		if(engine->getWindow()->getJoyButton(7) != 0) {
 			for(int i = 0; i < actors->getHeroAmt(); ++i) {
@@ -61,26 +65,21 @@ void GameLoop::logic(Mode::Engine *engine) {
 			}
 		}
 
-		if(engine->getWindow()->getJoyButton(3) != 0) {
-			if(!GameLoop::pauseBuf) {
-				globalGameMode = PAUSE_MENU;
-				GameLoop::pauseBuf = true;
-				engine->switch_();
-			}
-		} else {
-			GameLoop::pauseBuf = false;
-		}
+		bufFunc(engine->getWindow()->getJoyButton(3) != 0,
+				&GameLoop::pauseBuf,
+				[] (Mode::Engine *engine, GameModeType *mode) {*mode=PAUSE_MENU;engine->switch_();},
+				engine, &globalGameMode);
 	} else {
-		if(engine->getWindow()->getKey(GLFW_KEY_Q)) {
-			if(!GameLoop::qBuf && actors->getHeroAmt() < 4) {
-				if(actors->getHeroAmt() != 2) actors->pushHero(actors->getHero(actors->getHeroAmt()-1)->getX(), actors->getHero(actors->getHeroAmt()-1)->getY() + 150, 75, 75, 325.f, 100);
-				else                          actors->pushHero(actors->getHero(actors->getHeroAmt()-1)->getX() + 150, actors->getHero(actors->getHeroAmt()-1)->getY() - 150, 75, 75, 325.f, 100);
-				--actors->heroPoints;
-			}
-			GameLoop::qBuf = true;
-		} else {
-			GameLoop::qBuf = false;
-		}
+		bufFunc(engine->getWindow()->getKey(GLFW_KEY_Q),
+				&GameLoop::qBuf,
+				[] (Actors *actors, void *v) {
+					if(actors->getHeroAmt() < 4) {
+						if(actors->getHeroAmt() != 2) actors->pushHero(actors->getHero(actors->getHeroAmt()-1)->getX(), actors->getHero(actors->getHeroAmt()-1)->getY() + 150, 75, 75, 325.f, 100);
+						else                          actors->pushHero(actors->getHero(actors->getHeroAmt()-1)->getX() + 150, actors->getHero(actors->getHeroAmt()-1)->getY() - 150, 75, 75, 325.f, 100);
+						--actors->heroPoints;
+					}
+				},
+				actors, nullptr);
 
 		for(int i = GLFW_KEY_1; i < GLFW_KEY_9; ++i) {
 			if(engine->getWindow()->getKey(i)) {
@@ -90,15 +89,10 @@ void GameLoop::logic(Mode::Engine *engine) {
 			}
 		}
 
-		if(engine->getWindow()->getKey(GLFW_KEY_ESCAPE)) {
-			if(!GameLoop::pauseBuf) {
-				globalGameMode = PAUSE_MENU;
-				GameLoop::pauseBuf = true;
-				engine->switch_();
-			}
-		} else {
-			GameLoop::pauseBuf = false;
-		}
+		bufFunc(engine->getWindow()->getKey(GLFW_KEY_ESCAPE),
+				&GameLoop::pauseBuf,
+				[] (Mode::Engine *engine, GameModeType *mode) {*mode=PAUSE_MENU;engine->switch_();},
+				engine, &globalGameMode);
 	}
 
 	if(actors->getHeros()->empty()) {
@@ -111,7 +105,7 @@ void GameLoop::render(Mode::Engine *engine) {
 	Actors *actors = engine->getData<Actors>();
 
 #ifndef _WIN32
-	Font::print(boost::lexical_cast<std::string>((int)engine->getInstFps()), 15, 39);
+	Font::print(SSTR((int)engine->getInstFps()), 15, 39);
 #endif
 
 	// HUD code goes above this line

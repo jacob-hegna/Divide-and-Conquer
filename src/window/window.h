@@ -12,7 +12,7 @@
 #include <rapidxml/rapidxml.hpp>
 #include <rapidxml/rapidxml_utils.hpp>
 
-#include "../utilities/joystick.h"
+#include "../util/util.h"
 
 class Window
 {
@@ -66,6 +66,9 @@ public:
 	bool isJoy(void) {
 		return _inputType==JOYSTICK;
 	}
+	void setJoy(bool is) {
+		(is) ? _inputType = JOYSTICK : _inputType = KEYBOARD;
+	}
 
 	GLFWwindow* getWindow(void) {
 		return _window;
@@ -90,9 +93,15 @@ public:
 	int getW(void) {
 		return _w;
 	}
+	void setW(int w) {
+		_w = w;
+	}
 
 	int getH(void) {
 		return _h;
+	}
+	void setH(int h) {
+		_h = h;
 	}
 
 	void incFrames(void) {
@@ -110,6 +119,7 @@ private:
 	std::string _title;
 	int _x, _y;
 	int _w, _h;
+	int _oldW, _oldH;
 	bool _fc;
 	int _aa;
 

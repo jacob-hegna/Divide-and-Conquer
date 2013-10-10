@@ -1,4 +1,4 @@
-#include "util.h"
+#include "randf.h"
 
 float randF(float a, float b) {
     float random = ((float) rand()) / (float) RAND_MAX;
