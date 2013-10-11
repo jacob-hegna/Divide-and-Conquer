@@ -9,7 +9,9 @@
 
 #include "../actor.h"
 #include "../../modes/engine/engine.h"
+#include "../bullet/guns.h"
 #include "../bullet/bullet.h"
+#include "../../util/util.h"
 
 class Hero : public Actor {
 public:
@@ -40,7 +42,7 @@ public:
 	}
 
 	bool setType(int type) {
-		if(type < guns.size()) {
+		if(type < GUN_AMT) {
 			_gunType = type;
 			return true;
 		} else {
@@ -53,7 +55,7 @@ public:
 		}
 	}
 	void incType(void) {
-		if(_gunType < guns.size()) {
+		if(_gunType < GUN_AMT) {
 			++_gunType;
 		}
 	}

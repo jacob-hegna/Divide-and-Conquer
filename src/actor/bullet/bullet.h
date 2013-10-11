@@ -7,19 +7,10 @@
 #include <rapidxml/rapidxml.hpp>
 #include <rapidxml/rapidxml_utils.hpp>
 
+#include "guns.h"
 #include "../actor.h"
 #include "../../modes/engine/engine.h"
 #include "../../util/util.h"
-
-struct Gun {
-	std::string name;
-    float speed;
-    int bW, bH;
-    float damage;
-    float delay;
-	float acc;
-};
-extern std::vector<Gun> guns;
 
 class Bullet : public Actor
 {
@@ -38,8 +29,7 @@ public:
 	~Bullet(void) {
 
 	}
-
-	static void initGuns( void );
+	
     void init(float x, float y, float theta, int type);
     void move(Mode::Engine *engine);
 	void render();

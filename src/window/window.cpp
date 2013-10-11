@@ -65,14 +65,8 @@ int Window::init(void)
 			  << "  <pos  x=\"15\" y=\"15\"/>"                                                                 << std::endl
 			  << "  <size w=\"800\" h=\"600\" fullscreen=\"0\"/>"                                              << std::endl
 			  << "  <color r=\"1\" g=\"1\" b=\"1\"/>"                                                          << std::endl
-		      << "</window>"
-		      << "<input type=\"keyboard\"/>"                                                                  << std::endl
-		      << "<guns>"                                                                                      << std::endl
-		      << "  <gun name=\"pistol\" w=\"4\" h=\"4\" s=\"650\" da=\"20\" de=\"-1\" a=\"0.1f\"/>"           << std::endl
-		      << "  <gun name=\"gatling\" w=\"3\" h=\"3\" s=\"650\" da=\"1\" de=\"0.001f\" a=\"0.5f\"/>"       << std::endl
-		      << "  <gun name=\"sniper\" w=\"8\" h=\"8\" s=\"850\" da=\"65\" de=\"-1\" a=\"0.05f\"/>"          << std::endl
-		      << "  <gun name=\"RPG\" w=\"25\" h=\"25\" s=\"550\" da=\"150\" de=\"-1\" a=\"0.15f\"/>"          << std::endl
-		      << "</guns>"                                                                  << std::endl;
+		      << "</window>"                                                                                   << std::endl
+		      << "<input type=\"keyboard\"/>"                                                                  << std::endl;
 		ofile.close();
 		_clearColor.r = 1.f;
 		_clearColor.g = 1.f;

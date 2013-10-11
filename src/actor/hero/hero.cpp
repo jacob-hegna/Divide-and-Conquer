@@ -6,7 +6,6 @@ void Hero::init(float x, float y,
 				float speed,
 				float health)
 {
-	Bullet::initGuns();
 	_bullet = nullptr;
 	_bullet = new std::vector<Bullet*>;
 
