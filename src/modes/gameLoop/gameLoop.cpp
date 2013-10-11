@@ -58,11 +58,10 @@ void GameLoop::logic(Mode::Engine *engine) {
 		}
 	}
 	for(int i = 0; i < actors->getEnemyAmt(); ++i) {
-		actors->getEnemy(i)->move(engine);
-
 		if(actors->getEnemy(i)->getDead()) {
 			actors->getEnemy(i)->init(randF(-400, 400), randF(-300, 300), 75, 75, randF(130.f, 292.5f), 100, 10);
 		}
+		actors->getEnemy(i)->move(engine);
 	}
 	if(engine->getWindow()->isJoy()) {
 		bufFunc(engine->getWindow()->getJoyButton(12) != 0,
