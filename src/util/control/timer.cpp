@@ -1,5 +1,5 @@
 /*************************************************************************
- * Divide and Conquer - gameOver.cpp                                     *
+ * Divide and Conquer - timer.cpp                                        *
  * www.github.com/jacob-hegna/Divide-and-Conquer                         *
  * --------------------------------------------------------------------- *
  * Copyright 2013 Jacob Hegna.                                           *
@@ -20,18 +20,42 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>. *
  ************************************************************************/
 
-#include "gameOver.h"
+#include "timer.h"
 
-void GameOver::render(Mode::Engine *engine) {
-	glColor4f(0.f, 0.f, 0.f, 1.f);
-	glBegin(GL_QUADS);
-		glVertex2d(0, 0);
-		glVertex2d(engine->getWindow()->getW(), 0);
-		glVertex2d(engine->getWindow()->getW(), engine->getWindow()->getH());
-		glVertex2d(0, engine->getWindow()->getH());
-	glEnd();
-	if((engine->getWindow()->isJoy()) ? engine->getWindow()->getJoyButton(13) != 0 :
-		engine->getWindow()->getKey(GLFW_KEY_SPACE) || engine->getWindow()->getKey(GLFW_KEY_ESCAPE)) {
-		engine->getWindow()->close();
+void Timer::init( double (*timerFunc)(void) ) {
+	_timerFunc = timerFunc;
+	_start = _timerFunc();
+}
+
+void Timer::update( void ) {
+	_total.push_back(_timerFunc() - _start);
+	_start = _timerFunc();
+}
+
+double Timer::getTime(void) {
+	float sum = 0.f;
+	for(int i = 0; i < _total.size(); ++i) {
+		sum += _total.at(i);
 	}
+	return sum;
+}
+
+void Timer::setInstant( void ) {
+	_instStart = _timerFunc();
+}
+
+double Timer::getInstant( void ) {
+	return _timerFunc() - _instStart;
+}
+
+void Timer::reset( void ) {
+	_start = _timerFunc();
+}
+
+void Timer::pause(void) {
+
+}
+
+void Timer::unpause(void) {
+	_start = _timerFunc();
 }
