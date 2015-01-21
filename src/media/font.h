@@ -4,12 +4,12 @@
 #include <string>
 #include <GLFW/glfw3.h>
 
-#ifndef _WIN32
+#if !defined(_WIN32) && !defined(__APPLE__)
 #include <oglft/OGLFT.h>
 #endif
 
 namespace Font {
-#ifndef _WIN32
+#if !defined(_WIN32) && !defined(__APPLE__)
     extern OGLFT::Monochrome *face;
 #endif
     void init(void);

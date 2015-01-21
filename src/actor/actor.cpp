@@ -35,7 +35,7 @@ void Actor::rotate(Actor *dest, float xpos, float ypos, float camx, float camy, 
 		dest->getCenter(&fx, &fy);
 		xpos = fx;
 		ypos = fy;
-		_theta = asin( (xpos - getXMid()) / (sqrt(pow(xpos-getXMid(), 2) + pow(ypos - getYMid(), 2))) );
+		_theta = asin( (xpos - getXMid()) / sqrt(pow(xpos-getXMid(), 2) + pow(ypos - getYMid(), 2)) );
 
 		_theta *= -1;
 		_theta += M_PI/4;

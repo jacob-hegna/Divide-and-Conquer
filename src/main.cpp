@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 	if(Window::initGLFW() != 0) {
 		return -1;
 	}
-	
+
 	Window* window(new Window);
 	window->init();
 
